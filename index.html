@@ -14,8 +14,6 @@
         /* ============================================
            DESIGN SYSTEM - BeeVisible
            ============================================ */
-
-        /* FIX GHL */
         .c-editor, .c-editor > div, .hl_page-creator--content,
         .hl_page-creator--content > div, [data-page-element="Container"],
         .container-width-full {
@@ -86,19 +84,30 @@
             to { opacity: 1; }
         }
 
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-40px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
         @keyframes shine {
             0% { left: -100%; }
             50%, 100% { left: 100%; }
+        }
+
+        @keyframes whatsappPulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        @keyframes labelSlideIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .reveal {
@@ -219,18 +228,6 @@
             animation: shine 2.5s infinite;
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
         .btn svg {
             width: 18px;
             height: 18px;
@@ -241,7 +238,7 @@
            ============================================ */
         .hero {
             position: relative;
-            padding: 80px 0 100px;
+            padding: 60px 0 50px;
             background: var(--bg);
             overflow: hidden;
             text-align: center;
@@ -324,7 +321,6 @@
             transform: translateY(-2px);
         }
 
-        /* Search suggestions dropdown */
         .search-suggestions {
             position: absolute;
             top: calc(100% + 8px);
@@ -361,13 +357,8 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .search-suggestions-item:last-child {
-            border-bottom: none;
-        }
-
-        .search-suggestions-item:hover {
-            background: var(--bg);
-        }
+        .search-suggestions-item:last-child { border-bottom: none; }
+        .search-suggestions-item:hover { background: var(--bg); }
 
         .search-suggestions-item svg {
             width: 16px;
@@ -409,102 +400,15 @@
             height: 22px;
         }
 
-        /* Contact Banner */
-        .contact-banner {
-            background: rgba(255,255,255,0.95);
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            padding: 28px 32px;
-            margin-top: 28px;
-            text-align: center;
-        }
-        .contact-banner-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 18px;
-        }
-        .contact-banner-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px 32px;
-            margin-bottom: 16px;
-        }
-        .contact-banner-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            color: #444;
-        }
-        .contact-banner-item svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            color: #f5a623;
-        }
-        .contact-banner-item a {
-            color: #f5a623;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .contact-banner-item a:hover {
-            color: #d4891a;
-            text-decoration: underline;
-        }
-        .contact-banner-chat {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #f5a623;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 22px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            margin-top: 4px;
-        }
-        .contact-banner-chat:hover {
-            background: #d4891a;
-        }
-        .contact-banner-chat svg {
-            width: 18px;
-            height: 18px;
-        }
-        .contact-banner-note {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 14px;
-        }
-        @media (max-width: 600px) {
-            .contact-banner-items {
-                flex-direction: column;
-                align-items: center;
-                gap: 14px;
-            }
-        }
-
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 40px;
-            margin-top: 50px;
+            margin-top: 40px;
             animation: fadeInUp 0.8s ease 0.6s backwards;
         }
 
-        .hero-stat {
-            text-align: center;
-        }
+        .hero-stat { text-align: center; }
 
         .hero-stat-value {
             font-family: 'Montserrat', sans-serif !important;
@@ -520,7 +424,55 @@
         }
 
         /* ============================================
-           CATEGORIES
+           CONTACT BANNER (sticky)
+           ============================================ */
+        .contact-banner {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 16px 0;
+            position: sticky;
+            top: 73px;
+            z-index: 90;
+        }
+
+        .contact-banner .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 16px 32px;
+        }
+
+        .contact-banner-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+            color: #444;
+        }
+
+        .contact-banner-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .contact-banner-item a {
+            color: var(--primary);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .contact-banner-item a:hover {
+            color: #023e66;
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           CATEGORIES FUNNEL
            ============================================ */
         .categories {
             padding: 60px 0 80px;
@@ -554,9 +506,7 @@
             margin-bottom: 12px;
         }
 
-        .section-title .accent {
-            color: var(--primary);
-        }
+        .section-title .accent { color: var(--primary); }
 
         .section-description {
             font-size: 1.05rem;
@@ -568,6 +518,17 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .cat-grid.hidden {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
         }
 
         .cat-card {
@@ -595,9 +556,7 @@
             transition: transform 0.35s ease;
         }
 
-        .cat-card:hover::before {
-            transform: scaleX(1);
-        }
+        .cat-card:hover::before { transform: scaleX(1); }
 
         .cat-card:hover {
             transform: translateY(-6px);
@@ -616,14 +575,9 @@
             transition: transform 0.3s;
         }
 
-        .cat-card:hover .cat-icon {
-            transform: scale(1.1);
-        }
+        .cat-card:hover .cat-icon { transform: scale(1.1); }
 
-        .cat-icon svg {
-            width: 28px;
-            height: 28px;
-        }
+        .cat-icon svg { width: 28px; height: 28px; }
 
         .cat-icon.blue { background: var(--primary-light); color: var(--primary); }
         .cat-icon.green { background: #ecfdf5; color: var(--green); }
@@ -645,98 +599,67 @@
         }
 
         /* ============================================
-           FAQ SECTION
+           FAQ FUNNEL VIEW (one category at a time)
            ============================================ */
-        .faq-section {
-            padding: 80px 0 100px;
-            background: var(--white);
+        .faq-funnel {
+            display: none;
+            animation: fadeIn 0.4s ease;
         }
 
-        .faq-layout {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 40px;
-            align-items: start;
+        .faq-funnel.active {
+            display: block;
         }
 
-        .faq-sidebar {
-            position: sticky;
-            top: 90px;
-        }
-
-        .faq-sidebar-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--muted);
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .faq-sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .faq-sidebar-link {
-            display: flex;
+        .btn-back {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
             font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--muted);
             cursor: pointer;
-            transition: all 0.2s;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--muted);
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 28px;
         }
 
-        .faq-sidebar-link:hover,
-        .faq-sidebar-link.active {
-            background: var(--primary-light);
+        .btn-back:hover {
+            border-color: var(--primary);
             color: var(--primary);
+            background: var(--primary-light);
         }
 
-        .faq-sidebar-link svg {
+        .btn-back svg {
             width: 18px;
             height: 18px;
-            flex-shrink: 0;
-        }
-
-        .faq-main {
-            min-width: 0;
-        }
-
-        .faq-category {
-            margin-bottom: 40px;
         }
 
         .faq-category-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
             border-bottom: 2px solid var(--border);
         }
 
         .faq-cat-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .faq-cat-icon svg {
-            width: 20px;
-            height: 20px;
-        }
+        .faq-cat-icon svg { width: 22px; height: 22px; }
 
         .faq-category-title {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             color: var(--primary-dark);
         }
 
@@ -772,9 +695,7 @@
             gap: 16px;
         }
 
-        .accordion-header:hover {
-            background: var(--bg);
-        }
+        .accordion-header:hover { background: var(--bg); }
 
         .accordion-header .chevron {
             flex-shrink: 0;
@@ -817,33 +738,80 @@
             line-height: 1.8;
             border-top: 1px solid var(--border);
             padding-top: 16px;
-            margin-top: 0;
         }
 
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--muted);
-            display: none;
-        }
-
-        .no-results.visible { display: block; }
-
-        .no-results-icon {
-            width: 64px;
-            height: 64px;
+        /* Feedback box */
+        .feedback-box {
+            margin-top: 32px;
             background: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            text-align: center;
         }
 
-        .no-results-icon svg {
-            width: 28px;
-            height: 28px;
-            color: var(--muted);
+        .feedback-box p {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-feedback {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--text);
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-feedback svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-feedback.yes:hover {
+            border-color: var(--green);
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .btn-feedback.no:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .feedback-thanks {
+            display: none;
+            background: #ecfdf5;
+            border: 1px solid var(--green);
+            color: #065f46;
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            text-align: center;
+            margin-top: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-thanks.visible {
+            display: block;
         }
 
         /* ============================================
@@ -1018,6 +986,70 @@
         }
 
         /* ============================================
+           WHATSAPP FLOATING BUTTON
+           ============================================ */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .whatsapp-float-label {
+            background: var(--white);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            margin-right: -8px;
+            opacity: 0;
+            transform: translateX(10px);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            white-space: nowrap;
+        }
+
+        .whatsapp-float:hover .whatsapp-float-label,
+        .whatsapp-float-label.show {
+            opacity: 1;
+            transform: translateX(0);
+            animation: labelSlideIn 0.3s ease;
+        }
+
+        .whatsapp-float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: whatsappPulse 2s infinite;
+            border: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* ============================================
            FOOTER
            ============================================ */
         .footer {
@@ -1104,35 +1136,6 @@
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 1024px) {
-            .faq-layout {
-                grid-template-columns: 1fr;
-            }
-            .faq-sidebar {
-                position: static;
-                display: flex;
-                flex-direction: row;
-                gap: 0;
-                overflow-x: auto;
-                padding-bottom: 16px;
-                border-bottom: 1px solid var(--border);
-                margin-bottom: 20px;
-            }
-            .faq-sidebar-title { display: none; }
-            .faq-sidebar-nav {
-                flex-direction: row;
-                gap: 8px;
-                min-width: max-content;
-            }
-            .faq-sidebar-link {
-                white-space: nowrap;
-                padding: 8px 16px;
-                border: 1px solid var(--border);
-                border-radius: var(--radius-xl);
-                font-size: 0.85rem;
-            }
-        }
-
         @media (max-width: 768px) {
             .cat-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1149,13 +1152,32 @@
                 padding: 30px 20px;
             }
             .hero {
-                padding: 60px 0 80px;
+                padding: 40px 0 40px;
             }
             .hero-stats {
                 gap: 24px;
             }
             .header-nav a:not(.btn) {
                 display: none;
+            }
+            .contact-banner .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .whatsapp-float {
+                bottom: 18px;
+                right: 18px;
+            }
+            .whatsapp-float-btn {
+                width: 54px;
+                height: 54px;
+            }
+            .whatsapp-float-btn svg {
+                width: 28px;
+                height: 28px;
+            }
+            .feedback-box {
+                padding: 20px 16px;
             }
         }
 
@@ -1186,7 +1208,7 @@
                 <span class="label">Centre d'aide</span>
             </div>
             <nav class="header-nav">
-                <a href="#faq">FAQ</a>
+                <a href="#categories">FAQ</a>
                 <a href="#contact">Contact</a>
                 <a href="https://beevisible.online" class="btn btn-primary btn-shine" style="padding: 10px 20px; font-size: 0.9rem;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1205,39 +1227,13 @@
                     Centre d'aide BeeVisible
                 </div>
                 <h1>Comment pouvons-nous <span class="highlight">vous aider</span> ?</h1>
-                <p class="hero-subtitle">Recherchez dans notre base de connaissances ou parcourez les categories ci-dessous pour trouver rapidement votre reponse.</p>
+                <p class="hero-subtitle">Trouvez une reponse en quelques clics ou contactez-nous directement</p>
                 <div class="search-box">
                     <span class="search-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     </span>
                     <input type="text" id="searchInput" placeholder="Tapez votre question ici..." autocomplete="off">
                     <div class="search-suggestions" id="searchSuggestions"></div>
-                </div>
-                <div class="contact-banner">
-                    <div class="contact-banner-title">Notre équipe Succès Client est à votre écoute</div>
-                    <div class="contact-banner-items">
-                        <div class="contact-banner-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            Lundi – Vendredi, 9h–12h &amp; 14h–18h
-                        </div>
-                        <div class="contact-banner-item">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.243-1.214l-.252-.156-2.905.863.863-2.905-.156-.252A8 8 0 1112 20z"/></svg>
-                            <a href="https://wa.me/33257102370" target="_blank" rel="noopener">+33 2 57 10 23 70</a> <span style="color:#888;font-size:0.8rem">(messagerie)</span>
-                        </div>
-                        <div class="contact-banner-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                            <a href="tel:+33257102370">+33 2 57 10 23 70</a>
-                        </div>
-                        <div class="contact-banner-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <a href="mailto:succes-client@beevisible.online">succes-client@beevisible.online</a>
-                        </div>
-                    </div>
-                    <a href="#contact" class="contact-banner-chat">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                        Chat en direct
-                    </a>
-                    <div class="contact-banner-note">Toutes vos demandes sont traitées sous 48h ouvrées</div>
                 </div>
 
                 <div class="hero-stats">
@@ -1258,18 +1254,42 @@
         </div>
     </section>
 
-    <!-- ============ CATEGORIES ============ -->
-    <section class="categories">
+    <!-- ============ CONTACT BANNER (sticky) ============ -->
+    <div class="contact-banner" id="contactBanner">
+        <div class="container">
+            <div class="contact-banner-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Lun-Ven, 9h-12h &amp; 14h-18h
+            </div>
+            <div class="contact-banner-item">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.243-1.214l-.252-.156-2.905.863.863-2.905-.156-.252A8 8 0 1112 20z"/></svg>
+                <a href="https://wa.me/33257102370" target="_blank" rel="noopener">+33 2 57 10 23 70</a>
+            </div>
+            <div class="contact-banner-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <a href="tel:+33257102370">+33 2 57 10 23 70</a>
+            </div>
+            <div class="contact-banner-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:succes-client@beevisible.online">succes-client@beevisible.online</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CATEGORIES + FAQ FUNNEL ============ -->
+    <section class="categories" id="categories">
         <div class="container">
             <div class="section-header reveal">
                 <div class="section-kicker">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                    Categories
+                    Quel est votre sujet ?
                 </div>
                 <h2 class="section-title">Parcourir par <span class="accent">categorie</span></h2>
                 <p class="section-description">Selectionnez un theme pour acceder directement aux questions les plus frequentes.</p>
             </div>
-            <div class="cat-grid">
+
+            <!-- Category cards grid -->
+            <div class="cat-grid" id="catGrid">
                 <div class="cat-card reveal" data-category="technique">
                     <div class="cat-icon blue">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
@@ -1320,475 +1340,522 @@
                     <div class="count">3 questions</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ============ FAQ ============ -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-kicker">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    FAQ
+            <!-- FAQ Funnel (one category at a time) -->
+            <div class="faq-funnel" id="faqFunnel">
+                <button class="btn-back" id="btnBack">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Retour aux categories
+                </button>
+
+                <!-- Technique -->
+                <div class="faq-category" data-cat="technique">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                        <h3 class="faq-category-title">Technique (Fiche Google & Site)</h3>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Mon site ne s'affiche plus, que faire ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Verifiez d'abord que le probleme ne vient pas de votre connexion internet en testant un autre site. Si le probleme persiste, contactez-nous immediatement via le formulaire ci-dessous ou par telephone. Nous intervenons generalement sous 2h ouvrees pour tout probleme d'accessibilite.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Ma fiche Google affiche des informations incorrectes</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Les informations sur Google Business Profile peuvent etre modifiees par des suggestions de tiers ou par Google lui-meme. Signalez-nous immediatement les erreurs constatees et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Je n'arrive pas a acceder a mon tableau de bord</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Le lien d'acces au tableau de bord est <a href="https://app.beevisible.online" target="_blank" style="color:var(--primary);text-decoration:underline;">https://app.beevisible.online</a>. Essayez de reinitialiser votre mot de passe via le lien "Mot de passe oublie" sur la page de connexion. Verifiez aussi vos spams. Si le probleme persiste, contactez notre support avec l'adresse email associee a votre compte et nous vous renverrons vos acces sous 24h.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Mon site s'affiche lentement, est-ce normal ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            La vitesse de chargement depend de plusieurs facteurs : poids des images, hebergement, et connexion de l'utilisateur. Nous optimisons regulierement les performances de votre site (compression d'images, mise en cache). Si vous constatez une lenteur inhabituelle, signalez-le nous et nous lancerons un audit technique.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Ma fiche Google a ete suspendue, que faire ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non verifiee, activite jugee suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procedure de reactivation aupres de Google. Le delai de retablissement est generalement de 3 a 7 jours ouvres.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="technique">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
                 </div>
-                <h2 class="section-title">Questions <span class="accent">frequentes</span></h2>
-                <p class="section-description">Cliquez sur une question pour voir la reponse detaillee.</p>
-            </div>
 
-            <div class="faq-layout">
-                <!-- Sidebar navigation -->
-                <aside class="faq-sidebar">
-                    <div class="faq-sidebar-title">Categories</div>
-                    <nav class="faq-sidebar-nav">
-                        <div class="faq-sidebar-link active" data-target="technique">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                            Technique
-                        </div>
-                        <div class="faq-sidebar-link" data-target="resultats">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                            Resultats
-                        </div>
-                        <div class="faq-sidebar-link" data-target="facturation">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                            Facturation
-                        </div>
-                        <div class="faq-sidebar-link" data-target="onboarding">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            Onboarding
-                        </div>
-                        <div class="faq-sidebar-link" data-target="modification">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                            Modifications
-                        </div>
-                        <div class="faq-sidebar-link" data-target="plateforme">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                            Plateforme
-                        </div>
-                        <div class="faq-sidebar-link" data-target="suivi">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
-                            Suivi
-                        </div>
-                    </nav>
-                </aside>
-
-                <!-- FAQ Content -->
-                <div class="faq-main">
-                    <!-- Technique -->
-                    <div class="faq-category" data-cat="technique">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                            <h3 class="faq-category-title">Technique (Fiche Google & Site)</h3>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Mon site ne s'affiche plus, que faire ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Verifiez d'abord que le probleme ne vient pas de votre connexion internet en testant un autre site. Si le probleme persiste, contactez-nous immediatement via le formulaire ci-dessous ou par telephone. Nous intervenons generalement sous 2h ouvrees pour tout probleme d'accessibilite.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Ma fiche Google affiche des informations incorrectes</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Les informations sur Google Business Profile peuvent etre modifiees par des suggestions de tiers ou par Google lui-meme. Signalez-nous immediatement les erreurs constatees et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Je n'arrive pas a acceder a mon tableau de bord</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Le lien d'acces au tableau de bord est <a href="https://app.beevisible.online" target="_blank" style="color:var(--primary);text-decoration:underline;">https://app.beevisible.online</a>. Essayez de reinitialiser votre mot de passe via le lien "Mot de passe oublie" sur la page de connexion. Verifiez aussi vos spams. Si le probleme persiste, contactez notre support avec l'adresse email associee a votre compte et nous vous renverrons vos acces sous 24h.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Mon site s'affiche lentement, est-ce normal ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                La vitesse de chargement depend de plusieurs facteurs : poids des images, hebergement, et connexion de l'utilisateur. Nous optimisons regulierement les performances de votre site (compression d'images, mise en cache). Si vous constatez une lenteur inhabituelle, signalez-le nous et nous lancerons un audit technique.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Ma fiche Google a ete suspendue, que faire ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non verifiee, activite jugee suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procedure de reactivation aupres de Google. Le delai de retablissement est generalement de 3 a 7 jours ouvres.
-                            </div></div>
-                        </div>
+                <!-- Resultats -->
+                <div class="faq-category" data-cat="resultats">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                        <h3 class="faq-category-title">Resultats & Performances</h3>
                     </div>
 
-                    <!-- Resultats -->
-                    <div class="faq-category" data-cat="resultats">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-                            <h3 class="faq-category-title">Resultats & Performances</h3>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Au bout de combien de temps vais-je voir des resultats ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Au bout de combien de temps vais-je voir des resultats ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Les premiers resultats apparaissent generalement entre 4 et 8 semaines apres la mise en place de l'ecosysteme BeeVisible. Le referencement local est un travail progressif : les positions s'ameliorent de mois en mois. Nous vous envoyons un rapport mensuel detaille pour suivre votre progression.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment lire mon rapport de performance mensuel ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Votre rapport contient : vos positions sur les mots-cles cibles, le nombre de vues de votre fiche Google, les appels et demandes d'itineraire recus. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Mes positions ont baisse, est-ce normal ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Des fluctuations ponctuelles sont normales, notamment lors des mises a jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus d'un mois, contactez-nous : nous analyserons la situation et ajusterons la strategie si necessaire.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Qu'est-ce que le "Pack Local" Google ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Le Pack Local est l'encadre avec la carte Google Maps qui apparait en haut des resultats de recherche pour les requetes locales (ex : "plombier Paris 15"). Y apparaitre est l'objectif principal de notre travail : c'est la que 42% des clics se concentrent.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Les resultats Google varient selon votre localisation exacte, votre historique de navigation et l'appareil utilise. Pour un test fiable, utilisez une fenetre de navigation privee et verifiez depuis differentes adresses. Notre rapport mensuel utilise des outils professionnels qui mesurent vos positions de maniere objective et neutre.
-                            </div></div>
-                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Les premiers resultats apparaissent generalement entre 4 et 8 semaines apres la mise en place de l'ecosysteme BeeVisible. Le referencement local est un travail progressif : les positions s'ameliorent de mois en mois. Nous vous envoyons un rapport mensuel detaille pour suivre votre progression.
+                        </div></div>
                     </div>
 
-                    <!-- Facturation -->
-                    <div class="faq-category" data-cat="facturation">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-                            <h3 class="faq-category-title">Facturation & Paiement</h3>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment lire mon rapport de performance mensuel ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Ou puis-je retrouver mes factures ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Vos factures vous sont envoyees par email chaque mois apres prelevement. Vous pouvez egalement les retrouver dans votre espace client, rubrique "Mes factures". Si vous avez besoin d'un duplicata, contactez-nous avec votre numero client.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Quels sont les moyens de paiement acceptes ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Nous acceptons Visa/Mastercard et le prelevement SEPA. Nous vous conseillons le paiement par carte bancaire pour eviter toute interruption de service liee aux delais des prelevements SEPA.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Mon prelevement a ete rejete, que se passe-t-il ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                En cas de rejet, nous vous contactons sous 48h pour regulariser la situation. Verifiez que votre compte est suffisamment approvisionne. Apres 2 rejets consecutifs, le service peut etre temporairement suspendu. Contactez-nous rapidement pour eviter toute interruption.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Puis-je changer de formule ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Oui, vous pouvez evoluer vers une formule superieure a tout moment. Le changement prend effet au prochain cycle de facturation. Pour un passage a une formule inferieure, celui-ci s'appliquera a la fin de votre periode d'engagement en cours. Contactez votre conseiller pour etudier les options.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment resilier mon abonnement ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                La resiliation se fait par email a succes-client@beevisible.online ou par courrier recommande avec un preavis de 30 jours. Indiquez votre numero client dans votre demande. Un conseiller vous contactera pour confirmer la procedure et vous proposer des alternatives si vous le souhaitez.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>A quelle date suis-je preleve chaque mois ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Le prelevement a lieu a la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous etes preleve le 15 de chaque mois). Cette date est indiquee sur votre contrat et sur chaque facture. En cas de jour non ouvre, le prelevement passe au jour ouvre suivant.
-                            </div></div>
-                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Votre rapport contient : vos positions sur les mots-cles cibles, le nombre de vues de votre fiche Google, les appels et demandes d'itineraire recus. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur.
+                        </div></div>
                     </div>
 
-<!-- Resiliation section removed - Q16 moved to Facturation -->
-
-                    <!-- Onboarding -->
-                    <div class="faq-category" data-cat="onboarding">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-                            <h3 class="faq-category-title">Onboarding (Demarrage)</h3>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Mes positions ont baisse, est-ce normal ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Quelles sont les etapes apres ma souscription ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                1) Vous recevez un email de bienvenue avec un questionnaire a completer. 2) Un appel de lancement est planifie avec votre consultant dedie. 3) Nous configurons et optimisons votre fiche Google et votre site. 4) Le travail de referencement demarre sous 5 jours ouvres apres reception de vos informations.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Quels acces dois-je vous fournir ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Nous avons besoin de l'acces administrateur a votre fiche Google Business Profile. Toutes les instructions detaillees sont fournies dans le questionnaire d'onboarding que vous recevrez par email. Vos acces sont securises et utilises uniquement pour la prestation.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Je n'ai pas encore de fiche Google, est-ce un probleme ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Pas du tout ! La creation et l'optimisation de votre fiche Google Business Profile font partie integrante de notre prestation. C'est meme l'un des tout premiers points que nous traitons lors de l'onboarding. Nous gerons tout de A a Z.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Combien de temps dure la phase d'onboarding ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                L'onboarding complet dure en moyenne 5 a 10 jours ouvres, selon la rapidite avec laquelle vous nous fournissez les acces et informations necessaires. L'appel de bienvenu a lieu dans les 48h suivant votre souscription, et le travail technique demarre immediatement apres.
-                            </div></div>
-                        </div>
-
-<!-- Q25 removed -->
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Des fluctuations ponctuelles sont normales, notamment lors des mises a jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus d'un mois, contactez-nous : nous analyserons la situation et ajusterons la strategie si necessaire.
+                        </div></div>
                     </div>
 
-                    <!-- Modification -->
-                    <div class="faq-category" data-cat="modification">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-                            <h3 class="faq-category-title">Modification (Infos & Contenu)</h3>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Qu'est-ce que le "Pack Local" Google ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Je souhaite modifier mes horaires ou mon adresse</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons a jour votre fiche Google et votre site sous 24h ouvrees. Pensez a nous prevenir aussi pour les horaires exceptionnels (jours feries, conges annuels, travaux).
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Puis-je ajouter des photos a ma fiche Google ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Oui, et c'est meme fortement recommande ! Envoyez-nous vos photos en haute qualite (minimum 720px de large, format JPG ou PNG) et nous les ajouterons a votre fiche. Les fiches avec des photos recentes recoivent en moyenne 42% de demandes d'itineraire en plus.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Je veux modifier le contenu de mon site web</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Les modifications mineures (textes, photos, coordonnees) sont incluses dans votre abonnement et traitees sous 48h. Pour des modifications structurelles (nouvelles pages, refonte de design), un devis complementaire pourra etre propose. Decrivez vos besoins via le formulaire de contact.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment ajouter ou modifier mes services sur ma fiche Google ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Envoyez-nous la liste complete de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons a jour la section "Services" de votre fiche Google sous 24h. Une fiche bien detaillee avec tous vos services ameliore votre visibilite sur les recherches specifiques.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Je change de numero de telephone, comment mettre a jour ?</span>
-                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Communiquez-nous votre nouveau numero des que possible. Nous le mettrons a jour sur votre fiche Google, votre site web et tous les annuaires ou vous etes reference. La coherence de vos informations (NAP : Nom, Adresse, Telephone) sur tous les supports est essentielle pour votre referencement local.
-                            </div></div>
-                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Le Pack Local est l'encadre avec la carte Google Maps qui apparait en haut des resultats de recherche pour les requetes locales (ex : "plombier Paris 15"). Y apparaitre est l'objectif principal de notre travail : c'est la que 42% des clics se concentrent.
+                        </div></div>
                     </div>
 
-                    <!-- Plateforme -->
-                    <div class="faq-category" data-cat="plateforme">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon" style="background:rgba(99,102,241,0.1);color:#6366F1;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                            <h3 class="faq-category-title">Utiliser votre plateforme</h3>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment configurer mon calendrier de prise de rendez-vous ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Rendez-vous dans la section Calendrier de votre plateforme. Vous pouvez y definir vos disponibilites, la duree de vos rendez-vous, et les creneaux horaires proposes a vos clients. Une fois configure, vous recevrez un lien de reservation que vous pouvez partager par email, sur votre site ou via vos reseaux sociaux. Vos clients pourront alors reserver directement en ligne et vous recevrez une notification automatique.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment voir et gerer mes contacts dans le CRM ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Dans le menu principal, accedez a Contacts pour voir l'ensemble de vos prospects et clients. Vous pouvez filtrer, rechercher, ajouter des notes, des tags ou creer des taches de suivi. Chaque contact dispose d'une fiche detaillee ou vous retrouvez l'historique des echanges, les rendez-vous passes et a venir, et toutes les interactions.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment planifier mes publications sur les reseaux sociaux ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                La section Calendrier de contenu vous permet de creer et programmer vos publications Facebook, Instagram et Google. Redigez votre texte, ajoutez vos images ou videos, puis choisissez la date et l'heure de publication. Vous pouvez preparer plusieurs semaines de contenu a l'avance. Vos publications seront diffusees automatiquement aux dates programmees.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment modifier mon site web moi-meme ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Accedez a Sites dans votre plateforme, puis cliquez sur votre site. Le constructeur visuel vous permet de modifier textes, images et sections par simple glisser-deposer. Cliquez sur n'importe quel element pour le modifier directement. N'oubliez pas de cliquer sur Enregistrer puis Publier pour que vos modifications soient visibles en ligne.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment gerer et repondre aux avis clients ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Dans la section Reputation, vous retrouvez tous les avis laisses sur Google, Facebook et autres plateformes. Vous pouvez repondre directement depuis votre espace client sans avoir a vous connecter sur chaque plateforme. Repondre aux avis (positifs comme negatifs) montre votre professionnalisme et ameliore votre visibilite en ligne.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment lire mes statistiques et resultats ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Le Tableau de bord (disponible des la page d'accueil) affiche vos indicateurs cles : nombre de nouveaux contacts, rendez-vous pris, taux d'ouverture des emails, performances des campagnes. Consultez-le regulierement pour suivre vos progres et identifier ce qui fonctionne le mieux pour votre entreprise.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment voir et repondre aux messages de mes clients ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                La section Conversations centralise tous les echanges : SMS, emails, messages Facebook/Instagram, webchat. Vous n'avez plus besoin de jongler entre plusieurs applications. Cliquez sur une conversation pour voir l'historique complet et repondre directement. Vos clients recoivent votre reponse sur le canal qu'ils ont utilise.
-                            </div></div>
-                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Les resultats Google varient selon votre localisation exacte, votre historique de navigation et l'appareil utilise. Pour un test fiable, utilisez une fenetre de navigation privee et verifiez depuis differentes adresses. Notre rapport mensuel utilise des outils professionnels qui mesurent vos positions de maniere objective et neutre.
+                        </div></div>
                     </div>
 
-                    <!-- Suivi & Accompagnement -->
-                    <div class="faq-category" data-cat="suivi">
-                        <div class="faq-category-header">
-                            <div class="faq-cat-icon" style="background:rgba(236,72,153,0.1);color:#EC4899;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
-                            <h3 class="faq-category-title">Suivi & Accompagnement</h3>
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="resultats">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
                         </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
+                </div>
 
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment se passe le suivi de mon dossier ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                BeeVisible est une solution technologique de referencement local, pas un accompagnement humain au quotidien. Concretement : vous beneficiez d'un rendez-vous strategique tous les 3 mois avec un expert du referencement local pour faire le point sur vos resultats et ajuster la strategie. Entre ces rendez-vous, vous recevez automatiquement votre rapport de performance par email le 15 de chaque mois, et vous pouvez consulter vos resultats en temps reel a tout moment sur votre plateforme BeeVisible (app.beevisible.online).
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>A quelle frequence ai-je un rendez-vous avec un expert ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Un rendez-vous strategique est programme tous les 3 mois avec un expert du referencement local. Ce rendez-vous permet de faire le bilan de vos resultats, d'ajuster les mots-cles et la strategie si necessaire, et de repondre a toutes vos questions. Entre ces rendez-vous, notre equipe travaille en continu sur votre visibilite.
-                            </div></div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <span>Comment suivre mes resultats entre deux rendez-vous ?</span>
-                                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                            <div class="accordion-body"><div class="accordion-body-inner">
-                                Deux moyens complementaires : 1) Votre rapport mensuel vous est envoye automatiquement par email le 15 de chaque mois avec un recapitulatif complet de vos performances. 2) Votre plateforme BeeVisible (app.beevisible.online) affiche vos statistiques en temps reel — vous pouvez la consulter a tout moment pour voir vos positions, vos avis, et vos indicateurs cles.
-                            </div></div>
-                        </div>
+                <!-- Facturation -->
+                <div class="faq-category" data-cat="facturation">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                        <h3 class="faq-category-title">Facturation & Paiement</h3>
                     </div>
 
-                    <div class="no-results" id="noResults">
-                        <div class="no-results-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Ou puis-je retrouver mes factures ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
                         </div>
-                        <p style="font-weight:600;margin-bottom:6px;">Aucun resultat trouve</p>
-                        <p>Essayez d'autres mots-cles ou contactez-nous directement via le formulaire ci-dessous.</p>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Vos factures vous sont envoyees par email chaque mois apres prelevement. Vous pouvez egalement les retrouver dans votre espace client, rubrique "Mes factures". Si vous avez besoin d'un duplicata, contactez-nous avec votre numero client.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Quels sont les moyens de paiement acceptes ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Nous acceptons Visa/Mastercard et le prelevement SEPA. Nous vous conseillons le paiement par carte bancaire pour eviter toute interruption de service liee aux delais des prelevements SEPA.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Mon prelevement a ete rejete, que se passe-t-il ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            En cas de rejet, nous vous contactons sous 48h pour regulariser la situation. Verifiez que votre compte est suffisamment approvisionne. Apres 2 rejets consecutifs, le service peut etre temporairement suspendu. Contactez-nous rapidement pour eviter toute interruption.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Puis-je changer de formule ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Oui, vous pouvez evoluer vers une formule superieure a tout moment. Le changement prend effet au prochain cycle de facturation. Pour un passage a une formule inferieure, celui-ci s'appliquera a la fin de votre periode d'engagement en cours. Contactez votre conseiller pour etudier les options.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment resilier mon abonnement ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            La resiliation se fait par email a succes-client@beevisible.online ou par courrier recommande avec un preavis de 30 jours. Indiquez votre numero client dans votre demande. Un conseiller vous contactera pour confirmer la procedure et vous proposer des alternatives si vous le souhaitez.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>A quelle date suis-je preleve chaque mois ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Le prelevement a lieu a la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous etes preleve le 15 de chaque mois). Cette date est indiquee sur votre contrat et sur chaque facture. En cas de jour non ouvre, le prelevement passe au jour ouvre suivant.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="facturation">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
+                </div>
+
+                <!-- Onboarding -->
+                <div class="faq-category" data-cat="onboarding">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                        <h3 class="faq-category-title">Onboarding (Demarrage)</h3>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Quelles sont les etapes apres ma souscription ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            1) Vous recevez un email de bienvenue avec un questionnaire a completer. 2) Un appel de lancement est planifie avec votre consultant dedie. 3) Nous configurons et optimisons votre fiche Google et votre site. 4) Le travail de referencement demarre sous 5 jours ouvres apres reception de vos informations.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Quels acces dois-je vous fournir ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Nous avons besoin de l'acces administrateur a votre fiche Google Business Profile. Toutes les instructions detaillees sont fournies dans le questionnaire d'onboarding que vous recevrez par email. Vos acces sont securises et utilises uniquement pour la prestation.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Je n'ai pas encore de fiche Google, est-ce un probleme ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Pas du tout ! La creation et l'optimisation de votre fiche Google Business Profile font partie integrante de notre prestation. C'est meme l'un des tout premiers points que nous traitons lors de l'onboarding. Nous gerons tout de A a Z.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Combien de temps dure la phase d'onboarding ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            L'onboarding complet dure en moyenne 5 a 10 jours ouvres, selon la rapidite avec laquelle vous nous fournissez les acces et informations necessaires. L'appel de bienvenu a lieu dans les 48h suivant votre souscription, et le travail technique demarre immediatement apres.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="onboarding">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
+                </div>
+
+                <!-- Modification -->
+                <div class="faq-category" data-cat="modification">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+                        <h3 class="faq-category-title">Modification (Infos & Contenu)</h3>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Je souhaite modifier mes horaires ou mon adresse</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons a jour votre fiche Google et votre site sous 24h ouvrees. Pensez a nous prevenir aussi pour les horaires exceptionnels (jours feries, conges annuels, travaux).
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Puis-je ajouter des photos a ma fiche Google ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Oui, et c'est meme fortement recommande ! Envoyez-nous vos photos en haute qualite (minimum 720px de large, format JPG ou PNG) et nous les ajouterons a votre fiche. Les fiches avec des photos recentes recoivent en moyenne 42% de demandes d'itineraire en plus.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Je veux modifier le contenu de mon site web</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Les modifications mineures (textes, photos, coordonnees) sont incluses dans votre abonnement et traitees sous 48h. Pour des modifications structurelles (nouvelles pages, refonte de design), un devis complementaire pourra etre propose. Decrivez vos besoins via le formulaire de contact.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment ajouter ou modifier mes services sur ma fiche Google ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Envoyez-nous la liste complete de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons a jour la section "Services" de votre fiche Google sous 24h. Une fiche bien detaillee avec tous vos services ameliore votre visibilite sur les recherches specifiques.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Je change de numero de telephone, comment mettre a jour ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Communiquez-nous votre nouveau numero des que possible. Nous le mettrons a jour sur votre fiche Google, votre site web et tous les annuaires ou vous etes reference. La coherence de vos informations (NAP : Nom, Adresse, Telephone) sur tous les supports est essentielle pour votre referencement local.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="modification">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
+                </div>
+
+                <!-- Plateforme -->
+                <div class="faq-category" data-cat="plateforme">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon" style="background:rgba(99,102,241,0.1);color:#6366F1;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                        <h3 class="faq-category-title">Utiliser votre plateforme</h3>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment configurer mon calendrier de prise de rendez-vous ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Rendez-vous dans la section Calendrier de votre plateforme. Vous pouvez y definir vos disponibilites, la duree de vos rendez-vous, et les creneaux horaires proposes a vos clients. Une fois configure, vous recevrez un lien de reservation que vous pouvez partager par email, sur votre site ou via vos reseaux sociaux. Vos clients pourront alors reserver directement en ligne et vous recevrez une notification automatique.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment voir et gerer mes contacts dans le CRM ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Dans le menu principal, accedez a Contacts pour voir l'ensemble de vos prospects et clients. Vous pouvez filtrer, rechercher, ajouter des notes, des tags ou creer des taches de suivi. Chaque contact dispose d'une fiche detaillee ou vous retrouvez l'historique des echanges, les rendez-vous passes et a venir, et toutes les interactions.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment planifier mes publications sur les reseaux sociaux ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            La section Calendrier de contenu vous permet de creer et programmer vos publications Facebook, Instagram et Google. Redigez votre texte, ajoutez vos images ou videos, puis choisissez la date et l'heure de publication. Vous pouvez preparer plusieurs semaines de contenu a l'avance. Vos publications seront diffusees automatiquement aux dates programmees.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment modifier mon site web moi-meme ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Accedez a Sites dans votre plateforme, puis cliquez sur votre site. Le constructeur visuel vous permet de modifier textes, images et sections par simple glisser-deposer. Cliquez sur n'importe quel element pour le modifier directement. N'oubliez pas de cliquer sur Enregistrer puis Publier pour que vos modifications soient visibles en ligne.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment gerer et repondre aux avis clients ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Dans la section Reputation, vous retrouvez tous les avis laisses sur Google, Facebook et autres plateformes. Vous pouvez repondre directement depuis votre espace client sans avoir a vous connecter sur chaque plateforme. Repondre aux avis (positifs comme negatifs) montre votre professionnalisme et ameliore votre visibilite en ligne.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment lire mes statistiques et resultats ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Le Tableau de bord (disponible des la page d'accueil) affiche vos indicateurs cles : nombre de nouveaux contacts, rendez-vous pris, taux d'ouverture des emails, performances des campagnes. Consultez-le regulierement pour suivre vos progres et identifier ce qui fonctionne le mieux pour votre entreprise.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment voir et repondre aux messages de mes clients ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            La section Conversations centralise tous les echanges : SMS, emails, messages Facebook/Instagram, webchat. Vous n'avez plus besoin de jongler entre plusieurs applications. Cliquez sur une conversation pour voir l'historique complet et repondre directement. Vos clients recoivent votre reponse sur le canal qu'ils ont utilise.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="plateforme">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
+                    </div>
+                </div>
+
+                <!-- Suivi -->
+                <div class="faq-category" data-cat="suivi">
+                    <div class="faq-category-header">
+                        <div class="faq-cat-icon" style="background:rgba(236,72,153,0.1);color:#EC4899;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg></div>
+                        <h3 class="faq-category-title">Suivi & Accompagnement</h3>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment se passe le suivi de mon dossier ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            BeeVisible est une solution technologique de referencement local, pas un accompagnement humain au quotidien. Concretement : vous beneficiez d'un rendez-vous strategique tous les 3 mois avec un expert du referencement local pour faire le point sur vos resultats et ajuster la strategie. Entre ces rendez-vous, vous recevez automatiquement votre rapport de performance par email le 15 de chaque mois, et vous pouvez consulter vos resultats en temps reel a tout moment sur votre plateforme BeeVisible (app.beevisible.online).
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>A quelle frequence ai-je un rendez-vous avec un expert ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Un rendez-vous strategique est programme tous les 3 mois avec un expert du referencement local. Ce rendez-vous permet de faire le bilan de vos resultats, d'ajuster les mots-cles et la strategie si necessaire, et de repondre a toutes vos questions. Entre ces rendez-vous, notre equipe travaille en continu sur votre visibilite.
+                        </div></div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Comment suivre mes resultats entre deux rendez-vous ?</span>
+                            <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                        </div>
+                        <div class="accordion-body"><div class="accordion-body-inner">
+                            Deux moyens complementaires : 1) Votre rapport mensuel vous est envoye automatiquement par email le 15 de chaque mois avec un recapitulatif complet de vos performances. 2) Votre plateforme BeeVisible (app.beevisible.online) affiche vos statistiques en temps reel — vous pouvez la consulter a tout moment pour voir vos positions, vos avis, et vos indicateurs cles.
+                        </div></div>
+                    </div>
+
+                    <div class="feedback-box">
+                        <p>Est-ce que cela repond a votre question ?</p>
+                        <div class="feedback-buttons">
+                            <button class="btn-feedback yes" data-action="yes">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                Oui, merci !
+                            </button>
+                            <button class="btn-feedback no" data-action="no" data-cat="suivi">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                Non, j'ai besoin d'aide
+                            </button>
+                        </div>
+                        <div class="feedback-thanks"></div>
                     </div>
                 </div>
             </div>
@@ -1853,6 +1920,14 @@
         </div>
     </section>
 
+    <!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+    <div class="whatsapp-float" id="whatsappFloat">
+        <span class="whatsapp-float-label" id="whatsappLabel">Besoin d'aide ?</span>
+        <a href="https://wa.me/33257102370?text=Bonjour%2C%20j%27ai%20besoin%20d%27aide%20avec..." target="_blank" rel="noopener" class="whatsapp-float-btn" aria-label="Contactez-nous sur WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.243-1.214l-.252-.156-2.905.863.863-2.905-.156-.252A8 8 0 1112 20z"/></svg>
+        </a>
+    </div>
+
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
         <div class="container">
@@ -1872,7 +1947,7 @@
                 <div>
                     <h4>Support</h4>
                     <ul>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#categories">FAQ</a></li>
                         <li><a href="#contact">Nous contacter</a></li>
                     </ul>
                 </div>
@@ -1880,11 +1955,11 @@
                     <h4>Contact</h4>
                     <div class="footer-contact-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        01 23 45 67 89
+                        +33 2 57 10 23 70
                     </div>
                     <div class="footer-contact-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        support@beevisible.fr
+                        succes-client@beevisible.online
                     </div>
                     <div class="footer-contact-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -1942,51 +2017,96 @@
             });
         });
 
-        /* --- Category cards scroll --- */
+        /* --- Funnel: Category card click --- */
+        var catGrid = document.getElementById('catGrid');
+        var faqFunnel = document.getElementById('faqFunnel');
+        var btnBack = document.getElementById('btnBack');
+        var allFaqCats = faqFunnel.querySelectorAll('.faq-category');
+
+        function showCategory(catName) {
+            // Hide grid, show funnel
+            catGrid.classList.add('hidden');
+            faqFunnel.classList.add('active');
+
+            // Show only the selected category
+            allFaqCats.forEach(function(cat) {
+                cat.style.display = cat.dataset.cat === catName ? '' : 'none';
+            });
+
+            // Close all accordions
+            faqFunnel.querySelectorAll('.accordion-item.open').forEach(function(item) {
+                item.classList.remove('open');
+                item.querySelector('.accordion-body').style.maxHeight = null;
+            });
+
+            // Hide any feedback thanks
+            faqFunnel.querySelectorAll('.feedback-thanks').forEach(function(el) {
+                el.classList.remove('visible');
+                el.textContent = '';
+            });
+
+            // Scroll to categories section
+            document.getElementById('categories').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showAllCategories() {
+            faqFunnel.classList.remove('active');
+            catGrid.classList.remove('hidden');
+            document.getElementById('categories').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         document.querySelectorAll('.cat-card').forEach(function(card) {
             card.addEventListener('click', function() {
-                var cat = this.dataset.category;
-                var target = document.querySelector('.faq-category[data-cat="' + cat + '"]');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    setTimeout(function() {
-                        var first = target.querySelector('.accordion-item');
-                        if (first && !first.classList.contains('open')) {
-                            first.querySelector('.accordion-header').click();
-                        }
-                    }, 500);
-                }
+                showCategory(this.dataset.category);
             });
         });
 
-        /* --- Sidebar nav --- */
-        document.querySelectorAll('.faq-sidebar-link').forEach(function(link) {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.faq-sidebar-link').forEach(function(l) { l.classList.remove('active'); });
-                this.classList.add('active');
-                var cat = this.dataset.target;
-                var target = document.querySelector('.faq-category[data-cat="' + cat + '"]');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        btnBack.addEventListener('click', showAllCategories);
+
+        /* --- Feedback buttons --- */
+        document.querySelectorAll('.btn-feedback').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var action = this.dataset.action;
+                var feedbackBox = this.closest('.feedback-box');
+                var thanksEl = feedbackBox.querySelector('.feedback-thanks');
+
+                if (action === 'yes') {
+                    thanksEl.textContent = 'Merci ! N\'hesitez pas si vous avez une autre question.';
+                    thanksEl.classList.add('visible');
+                    setTimeout(function() {
+                        thanksEl.classList.remove('visible');
+                        showAllCategories();
+                    }, 2000);
+                } else {
+                    // Pre-fill category and scroll to contact
+                    var catValue = this.dataset.cat;
+                    var catSelect = document.getElementById('category');
+                    if (catSelect && catValue) {
+                        catSelect.value = catValue;
+                    }
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
         /* --- Search with live suggestions --- */
         var searchInput = document.getElementById('searchInput');
-        var noResults = document.getElementById('noResults');
         var suggestionsBox = document.getElementById('searchSuggestions');
 
         // Build index of all FAQ questions
         var faqItems = [];
-        document.querySelectorAll('.accordion-item').forEach(function(item) {
-            var questionEl = item.querySelector('.accordion-header span');
-            if (questionEl) {
-                faqItems.push({
-                    text: questionEl.textContent,
-                    element: item
-                });
-            }
+        document.querySelectorAll('.faq-category').forEach(function(cat) {
+            var catName = cat.dataset.cat;
+            cat.querySelectorAll('.accordion-item').forEach(function(item) {
+                var questionEl = item.querySelector('.accordion-header span');
+                if (questionEl) {
+                    faqItems.push({
+                        text: questionEl.textContent,
+                        element: item,
+                        category: catName
+                    });
+                }
+            });
         });
 
         function highlightMatch(text, query) {
@@ -2007,7 +2127,7 @@
             });
 
             if (matches.length === 0) {
-                suggestionsBox.innerHTML = '<div class="search-suggestions-empty">Aucun résultat trouvé — <a href="#contact">contactez-nous</a></div>';
+                suggestionsBox.innerHTML = '<div class="search-suggestions-empty">Aucun resultat trouve — <a href="#contact">contactez-nous</a></div>';
             } else {
                 suggestionsBox.innerHTML = matches.slice(0, 8).map(function(m, i) {
                     return '<div class="search-suggestions-item" data-index="' + faqItems.indexOf(m) + '">' +
@@ -2026,61 +2146,45 @@
             var faq = faqItems[idx];
             if (!faq) return;
 
-            // Hide suggestions
             suggestionsBox.classList.remove('visible');
             searchInput.value = '';
 
-            // Reset FAQ visibility
-            document.querySelectorAll('.faq-category').forEach(function(cat) {
-                cat.style.display = '';
-                cat.querySelectorAll('.accordion-item').forEach(function(ai) { ai.style.display = ''; });
-            });
-            noResults.classList.remove('visible');
+            // Show the category and open the question
+            showCategory(faq.category);
 
-            // Scroll to the item and open it
-            var target = faq.element;
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
             setTimeout(function() {
-                if (!target.classList.contains('open')) {
-                    target.querySelector('.accordion-header').click();
-                }
-            }, 400);
+                var target = faq.element;
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function() {
+                    if (!target.classList.contains('open')) {
+                        target.querySelector('.accordion-header').click();
+                    }
+                }, 300);
+            }, 100);
         });
 
         searchInput.addEventListener('input', function() {
-            var query = this.value.toLowerCase().trim();
-            var anyVisible = false;
-
-            // Live suggestions
-            showSuggestions(query);
-
-            // Also filter FAQ section
-            document.querySelectorAll('.faq-category').forEach(function(cat) {
-                var catVisible = false;
-                cat.querySelectorAll('.accordion-item').forEach(function(item) {
-                    var text = item.textContent.toLowerCase();
-                    var match = !query || text.indexOf(query) !== -1;
-                    item.style.display = match ? '' : 'none';
-                    if (match) catVisible = true;
-                });
-                cat.style.display = catVisible ? '' : 'none';
-                if (catVisible) anyVisible = true;
-            });
-
-            noResults.classList.toggle('visible', query && !anyVisible);
+            showSuggestions(this.value.toLowerCase().trim());
         });
 
-        // Close suggestions on click outside
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-box')) {
                 suggestionsBox.classList.remove('visible');
             }
         });
 
-        // Reopen suggestions on focus if there's a query
         searchInput.addEventListener('focus', function() {
             if (this.value.trim()) showSuggestions(this.value.trim());
         });
+
+        /* --- WhatsApp label auto-show after 5s --- */
+        setTimeout(function() {
+            var label = document.getElementById('whatsappLabel');
+            if (label) {
+                label.classList.add('show');
+                setTimeout(function() { label.classList.remove('show'); }, 4000);
+            }
+        }, 5000);
 
         /* --- Form --- */
         var form = document.getElementById('contactForm');
