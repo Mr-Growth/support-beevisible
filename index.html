@@ -8,11 +8,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           DESIGN SYSTEM - BeeVisible Support
+           DESIGN SYSTEM - BeeVisible
            ============================================ */
 
         /* FIX GHL */
@@ -43,6 +43,8 @@
             --shadow-lg: 0 20px 40px -10px rgba(1, 77, 128, 0.15);
             --radius: 16px;
             --radius-sm: 8px;
+            --radius-lg: 20px;
+            --radius-xl: 50px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,35 +53,82 @@
 
         body {
             font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
-            background: var(--bg);
+            background: var(--white);
             color: var(--text);
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif !important;
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
             font-weight: 700 !important;
             line-height: 1.2;
         }
 
         a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ============================================
            HEADER
            ============================================ */
         .header {
-            background: var(--white);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 16px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: box-shadow 0.3s;
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow);
         }
 
         .header .container {
@@ -88,176 +137,471 @@
             justify-content: space-between;
         }
 
-        .header-logo {
+        .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .header-logo img {
+        .header-left img {
             height: 40px;
         }
 
-        .header-logo span {
+        .header-divider {
+            width: 1px;
+            height: 24px;
+            background: var(--border);
+        }
+
+        .header-left .label {
             font-family: 'Montserrat', sans-serif !important;
-            font-weight: 700;
-            font-size: 1.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-nav a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
             color: var(--primary);
         }
 
-        .header-badge {
-            background: var(--primary-light);
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--radius-xl);
+            font-weight: 600 !important;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif !important;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 8px 24px rgba(1, 77, 128, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #023e66;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(1, 77, 128, 0.35);
+        }
+
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2.5s infinite;
+        }
+
+        .btn-outline {
+            background: transparent;
             color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* ============================================
-           HERO / SEARCH
+           HERO SECTION
            ============================================ */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
-            padding: 60px 0 70px;
-            text-align: center;
             position: relative;
+            padding: 100px 0 120px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #0369a1 100%);
             overflow: hidden;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            bottom: -30px;
-            left: 0; right: 0;
-            height: 60px;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
             background: var(--bg);
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            padding: 10px 22px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255,255,255,0.15);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-kicker svg {
+            width: 18px;
+            height: 18px;
         }
 
         .hero h1 {
             color: var(--white);
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 8px;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease 0.15s backwards;
         }
 
-        .hero p {
-            color: rgba(255,255,255,0.8);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+        .hero h1 .highlight {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
         }
 
         .search-box {
-            max-width: 600px;
+            max-width: 620px;
             margin: 0 auto;
             position: relative;
+            animation: fadeInUp 0.8s ease 0.45s backwards;
         }
 
         .search-box input {
             width: 100%;
-            padding: 18px 24px 18px 54px;
+            padding: 20px 24px 20px 58px;
             border: none;
-            border-radius: 50px;
+            border-radius: var(--radius-xl);
             font-size: 1.05rem;
             font-family: 'Outfit', sans-serif;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
             outline: none;
-            transition: box-shadow 0.3s;
+            transition: box-shadow 0.3s, transform 0.3s;
+            background: var(--white);
         }
 
         .search-box input:focus {
-            box-shadow: 0 0 0 3px var(--accent), var(--shadow-lg);
+            box-shadow: 0 0 0 3px var(--accent), 0 20px 60px rgba(0,0,0,0.25);
+            transform: translateY(-2px);
         }
 
         .search-box .search-icon {
             position: absolute;
-            left: 20px;
+            left: 22px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.2rem;
             color: var(--muted);
         }
 
-        /* ============================================
-           CATEGORIES GRID
-           ============================================ */
-        .categories {
-            padding: 40px 0 60px;
+        .search-box .search-icon svg {
+            width: 22px;
+            height: 22px;
         }
 
-        .categories h2 {
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .hero-stat {
             text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 30px;
+        }
+
+        .hero-stat-value {
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 1.8rem;
+            font-weight: 800 !important;
+            color: var(--accent);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           CATEGORIES
+           ============================================ */
+        .categories {
+            padding: 60px 0 80px;
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: var(--radius-xl);
+            font-size: 0.85rem;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
             color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-title .accent {
+            color: var(--primary);
+        }
+
+        .section-description {
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.7;
         }
 
         .cat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
         .cat-card {
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px 16px;
+            padding: 32px 24px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.35s ease;
             box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+        }
+
+        .cat-card:hover::before {
+            transform: scaleX(1);
         }
 
         .cat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
             border-color: var(--primary);
         }
 
-        .cat-card .icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-            display: block;
+        .cat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            transition: transform 0.3s;
         }
+
+        .cat-card:hover .cat-icon {
+            transform: scale(1.1);
+        }
+
+        .cat-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cat-icon.blue { background: var(--primary-light); color: var(--primary); }
+        .cat-icon.green { background: #ecfdf5; color: var(--green); }
+        .cat-icon.orange { background: #fef3c7; color: var(--orange); }
+        .cat-icon.purple { background: #ede9fe; color: var(--purple); }
+        .cat-icon.red { background: #fef2f2; color: var(--red); }
+        .cat-icon.teal { background: #f0fdfa; color: #0d9488; }
 
         .cat-card .label {
             font-weight: 600;
             font-size: 0.95rem;
             color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .cat-card .count {
+            font-size: 0.8rem;
+            color: var(--muted);
         }
 
         /* ============================================
            FAQ SECTION
            ============================================ */
         .faq-section {
-            padding: 0 0 60px;
+            padding: 80px 0 100px;
+            background: var(--white);
         }
 
-        .faq-section h2 {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 40px;
+            align-items: start;
         }
 
-        .faq-section > .container > p {
-            text-align: center;
+        .faq-sidebar {
+            position: sticky;
+            top: 90px;
+        }
+
+        .faq-sidebar-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             color: var(--muted);
-            margin-bottom: 30px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .faq-sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .faq-sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .faq-sidebar-link:hover,
+        .faq-sidebar-link.active {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .faq-sidebar-link svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .faq-main {
+            min-width: 0;
         }
 
         .faq-category {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .faq-category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .faq-cat-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .faq-cat-icon svg {
+            width: 20px;
+            height: 20px;
         }
 
         .faq-category-title {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 1.15rem;
+            color: var(--primary-dark);
         }
 
         .accordion-item {
@@ -266,13 +610,21 @@
             border-radius: var(--radius-sm);
             margin-bottom: 8px;
             overflow: hidden;
-            transition: box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
-        .accordion-item:hover { box-shadow: var(--shadow-sm); }
+        .accordion-item:hover {
+            border-color: rgba(1,77,128,0.2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .accordion-item.open {
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(1,77,128,0.08);
+        }
 
         .accordion-header {
-            padding: 16px 20px;
+            padding: 18px 22px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -281,85 +633,149 @@
             font-size: 0.95rem;
             user-select: none;
             transition: background 0.2s;
+            gap: 16px;
         }
 
-        .accordion-header:hover { background: var(--bg); }
+        .accordion-header:hover {
+            background: var(--bg);
+        }
 
         .accordion-header .chevron {
-            transition: transform 0.3s;
-            font-size: 0.8rem;
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s ease;
+        }
+
+        .accordion-header .chevron svg {
+            width: 14px;
+            height: 14px;
             color: var(--muted);
+            transition: transform 0.35s ease;
         }
 
         .accordion-item.open .accordion-header .chevron {
+            background: var(--primary);
+        }
+
+        .accordion-item.open .accordion-header .chevron svg {
+            color: var(--white);
             transform: rotate(180deg);
         }
 
         .accordion-body {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s ease;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-body-inner {
-            padding: 0 20px 16px;
+            padding: 0 22px 20px;
             color: var(--muted);
-            font-size: 0.92rem;
-            line-height: 1.7;
+            font-size: 0.93rem;
+            line-height: 1.8;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: 0;
         }
 
         .no-results {
             text-align: center;
-            padding: 40px;
+            padding: 60px 20px;
             color: var(--muted);
             display: none;
         }
 
         .no-results.visible { display: block; }
 
+        .no-results-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .no-results-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--muted);
+        }
+
         /* ============================================
-           CONTACT FORM
+           CONTACT SECTION
            ============================================ */
         .contact-section {
-            padding: 60px 0;
+            padding: 100px 0;
+            background: var(--bg);
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 80px;
             background: var(--white);
+            clip-path: ellipse(55% 100% at 50% 0%);
         }
 
-        .contact-section h2 {
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .contact-header {
             text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 8px;
+            margin-bottom: 36px;
+        }
+
+        .contact-header h2 {
+            font-size: 1.6rem;
             color: var(--primary-dark);
+            margin-bottom: 8px;
         }
 
-        .contact-section > .container > p {
-            text-align: center;
+        .contact-header p {
             color: var(--muted);
-            margin-bottom: 30px;
+            font-size: 1rem;
         }
 
         .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
         .form-row {
             display: flex;
-            gap: 16px;
+            gap: 20px;
         }
 
         .form-group {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .form-group label {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
             color: var(--text);
         }
@@ -367,13 +783,14 @@
         .form-group input,
         .form-group select,
         .form-group textarea {
-            padding: 12px 16px;
-            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border: 1.5px solid var(--border);
             border-radius: var(--radius-sm);
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.25s;
+            background: var(--white);
         }
 
         .form-group input:focus,
@@ -383,7 +800,10 @@
             box-shadow: 0 0 0 3px var(--primary-light);
         }
 
-        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
 
         .form-group .error-msg {
             color: var(--red);
@@ -403,34 +823,63 @@
             background: var(--primary);
             color: var(--white);
             border: none;
-            padding: 14px 32px;
-            border-radius: 50px;
+            padding: 16px 36px;
+            border-radius: var(--radius-xl);
             font-family: 'Outfit', sans-serif;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.25s;
-            align-self: flex-start;
+            transition: all 0.3s;
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(1, 77, 128, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: shine 2.5s infinite;
         }
 
         .btn-submit:hover {
-            background: #016bad;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            background: #023e66;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(1, 77, 128, 0.35);
+        }
+
+        .btn-submit svg {
+            width: 18px;
+            height: 18px;
         }
 
         .form-success {
             background: #ecfdf5;
             border: 1px solid var(--green);
             color: #065f46;
-            padding: 16px 20px;
+            padding: 18px 24px;
             border-radius: var(--radius-sm);
             display: none;
             text-align: center;
             font-weight: 500;
         }
 
-        .form-success.visible { display: block; }
+        .form-success.visible { display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        .form-success svg {
+            width: 20px;
+            height: 20px;
+            color: var(--green);
+            flex-shrink: 0;
+        }
 
         /* ============================================
            FOOTER
@@ -438,65 +887,209 @@
         .footer {
             background: var(--primary-dark);
             color: rgba(255,255,255,0.7);
-            padding: 40px 0 20px;
+            padding: 60px 0 30px;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-top: 16px;
+            max-width: 280px;
+        }
+
+        .footer-brand img {
+            height: 36px;
+            filter: brightness(0) invert(1);
         }
 
         .footer h4 {
             color: var(--white);
-            font-size: 1rem;
-            margin-bottom: 12px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            font-weight: 700 !important;
         }
 
         .footer ul { list-style: none; }
-        .footer ul li { margin-bottom: 8px; font-size: 0.9rem; }
-        .footer ul li a:hover { color: var(--accent); }
+
+        .footer ul li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer ul li a {
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        .footer ul li a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-contact-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent);
         }
 
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 640px) {
-            .hero { padding: 40px 0 50px; }
-            .cat-grid { grid-template-columns: repeat(2, 1fr); }
-            .form-row { flex-direction: column; }
-            .header-badge { display: none; }
+        @media (max-width: 1024px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+            .faq-sidebar {
+                position: static;
+                display: flex;
+                flex-direction: row;
+                gap: 0;
+                overflow-x: auto;
+                padding-bottom: 16px;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 20px;
+            }
+            .faq-sidebar-title { display: none; }
+            .faq-sidebar-nav {
+                flex-direction: row;
+                gap: 8px;
+                min-width: max-content;
+            }
+            .faq-sidebar-link {
+                white-space: nowrap;
+                padding: 8px 16px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xl);
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .contact-wrapper {
+                padding: 30px 20px;
+            }
+            .hero {
+                padding: 70px 0 100px;
+            }
+            .hero-stats {
+                gap: 24px;
+            }
+            .header-nav a:not(.btn) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cat-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                flex-direction: column;
+            }
+            .hero-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- ============ HEADER ============ -->
-    <header class="header">
+    <header class="header" id="siteHeader">
         <div class="container">
-            <div class="header-logo">
-                <img src="https://storage.googleapis.com/msgsndr/FpKQJAgesKJXHiZAk2Cl/media/67c78e9c7c94cd55d58b5ed0.png" alt="BeeVisible">
-                <span>Centre d'aide</span>
+            <div class="header-left">
+                <a href="https://beevisible.online">
+                    <img src="https://storage.googleapis.com/msgsndr/FpKQJAgesKJXHiZAk2Cl/media/67c78e9c7c94cd55d58b5ed0.png" alt="BeeVisible">
+                </a>
+                <div class="header-divider"></div>
+                <span class="label">Centre d'aide</span>
             </div>
-            <div class="header-badge">Support Client</div>
+            <nav class="header-nav">
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+                <a href="https://beevisible.online" class="btn btn-primary btn-shine" style="padding: 10px 20px; font-size: 0.9rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Site principal
+                </a>
+            </nav>
         </div>
     </header>
 
-    <!-- ============ HERO + SEARCH ============ -->
+    <!-- ============ HERO ============ -->
     <section class="hero">
         <div class="container">
-            <h1>Comment pouvons-nous vous aider ?</h1>
-            <p>Recherchez dans notre base de connaissances ou parcourez les catégories</p>
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Tapez votre question ici..." autocomplete="off">
+            <div class="hero-content">
+                <div class="hero-kicker">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Centre d'aide BeeVisible
+                </div>
+                <h1>Comment pouvons-nous <span class="highlight">vous aider</span> ?</h1>
+                <p class="hero-subtitle">Recherchez dans notre base de connaissances ou parcourez les categories ci-dessous pour trouver rapidement votre reponse.</p>
+                <div class="search-box">
+                    <span class="search-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Tapez votre question ici..." autocomplete="off">
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">30+</div>
+                        <div class="hero-stat-label">Questions couvertes</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">24h</div>
+                        <div class="hero-stat-label">Temps de reponse</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">6</div>
+                        <div class="hero-stat-label">Categories</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -504,31 +1097,56 @@
     <!-- ============ CATEGORIES ============ -->
     <section class="categories">
         <div class="container">
-            <h2>Parcourir par catégorie</h2>
+            <div class="section-header reveal">
+                <div class="section-kicker">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Categories
+                </div>
+                <h2 class="section-title">Parcourir par <span class="accent">categorie</span></h2>
+                <p class="section-description">Selectionnez un theme pour acceder directement aux questions les plus frequentes.</p>
+            </div>
             <div class="cat-grid">
-                <div class="cat-card" data-category="technique">
-                    <span class="icon">🔧</span>
-                    <span class="label">Technique (Fiche Google & Site)</span>
+                <div class="cat-card reveal" data-category="technique">
+                    <div class="cat-icon blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <div class="label">Technique</div>
+                    <div class="count">Fiche Google & Site</div>
                 </div>
-                <div class="cat-card" data-category="resultats">
-                    <span class="icon">📊</span>
-                    <span class="label">Résultats & Performances</span>
+                <div class="cat-card reveal" data-category="resultats">
+                    <div class="cat-icon green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <div class="label">Resultats & Performances</div>
+                    <div class="count">5 questions</div>
                 </div>
-                <div class="cat-card" data-category="facturation">
-                    <span class="icon">💰</span>
-                    <span class="label">Facturation & Paiement</span>
+                <div class="cat-card reveal" data-category="facturation">
+                    <div class="cat-icon orange">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                    <div class="label">Facturation & Paiement</div>
+                    <div class="count">5 questions</div>
                 </div>
-                <div class="cat-card" data-category="onboarding">
-                    <span class="icon">🚀</span>
-                    <span class="label">Onboarding (Démarrage)</span>
+                <div class="cat-card reveal" data-category="onboarding">
+                    <div class="cat-icon purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <div class="label">Onboarding</div>
+                    <div class="count">Demarrage</div>
                 </div>
-                <div class="cat-card" data-category="modification">
-                    <span class="icon">📝</span>
-                    <span class="label">Modification (Infos & Contenu)</span>
+                <div class="cat-card reveal" data-category="modification">
+                    <div class="cat-icon teal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <div class="label">Modifications</div>
+                    <div class="count">Infos & Contenu</div>
                 </div>
-                <div class="cat-card" data-category="resiliation">
-                    <span class="icon">⚠️</span>
-                    <span class="label">Churn & Résiliation</span>
+                <div class="cat-card reveal" data-category="resiliation">
+                    <div class="cat-icon red">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <div class="label">Churn & Resiliation</div>
+                    <div class="count">5 questions</div>
                 </div>
             </div>
         </div>
@@ -537,391 +1155,463 @@
     <!-- ============ FAQ ============ -->
     <section class="faq-section" id="faq">
         <div class="container">
-            <h2>Questions fréquentes</h2>
-            <p>Cliquez sur une question pour voir la réponse</p>
-
-            <!-- 🔧 Technique (Fiche Google & Site) -->
-            <div class="faq-category" data-cat="technique">
-                <h3 class="faq-category-title">🔧 Technique (Fiche Google & Site)</h3>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Mon site ne s'affiche plus, que faire ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Vérifiez d'abord que le problème ne vient pas de votre connexion internet en testant un autre site. Si le problème persiste, contactez-nous immédiatement via le formulaire ci-dessous ou par téléphone. Nous intervenons généralement sous 2h ouvrées pour tout problème d'accessibilité.
-                    </div></div>
+            <div class="section-header reveal">
+                <div class="section-kicker">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    FAQ
                 </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Ma fiche Google affiche des informations incorrectes</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Les informations sur Google Business Profile peuvent être modifiées par des suggestions de tiers ou par Google lui-même. Signalez-nous immédiatement les erreurs constatées et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je n'arrive pas à accéder à mon tableau de bord</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Essayez de réinitialiser votre mot de passe via le lien « Mot de passe oublié » sur la page de connexion. Vérifiez aussi vos spams. Si le problème persiste, contactez notre support avec l'adresse email associée à votre compte et nous vous renverrons vos accès sous 24h.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Mon site s'affiche lentement, est-ce normal ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        La vitesse de chargement dépend de plusieurs facteurs : poids des images, hébergement, et connexion de l'utilisateur. Nous optimisons régulièrement les performances de votre site (compression d'images, mise en cache). Si vous constatez une lenteur inhabituelle, signalez-le nous et nous lancerons un audit technique.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Ma fiche Google a été suspendue, que faire ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non vérifiée, activité jugée suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procédure de réactivation auprès de Google. Le délai de rétablissement est généralement de 3 à 7 jours ouvrés.
-                    </div></div>
-                </div>
+                <h2 class="section-title">Questions <span class="accent">frequentes</span></h2>
+                <p class="section-description">Cliquez sur une question pour voir la reponse detaillee.</p>
             </div>
 
-            <!-- 📊 Résultats & Performances -->
-            <div class="faq-category" data-cat="resultats">
-                <h3 class="faq-category-title">📊 Résultats & Performances</h3>
+            <div class="faq-layout">
+                <!-- Sidebar navigation -->
+                <aside class="faq-sidebar">
+                    <div class="faq-sidebar-title">Categories</div>
+                    <nav class="faq-sidebar-nav">
+                        <div class="faq-sidebar-link active" data-target="technique">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            Technique
+                        </div>
+                        <div class="faq-sidebar-link" data-target="resultats">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                            Resultats
+                        </div>
+                        <div class="faq-sidebar-link" data-target="facturation">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Facturation
+                        </div>
+                        <div class="faq-sidebar-link" data-target="resiliation">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            Resiliation
+                        </div>
+                        <div class="faq-sidebar-link" data-target="onboarding">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            Onboarding
+                        </div>
+                        <div class="faq-sidebar-link" data-target="modification">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            Modifications
+                        </div>
+                    </nav>
+                </aside>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Au bout de combien de temps vais-je voir des résultats ?</span>
-                        <span class="chevron">▼</span>
+                <!-- FAQ Content -->
+                <div class="faq-main">
+                    <!-- Technique -->
+                    <div class="faq-category" data-cat="technique">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+                            <h3 class="faq-category-title">Technique (Fiche Google & Site)</h3>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Mon site ne s'affiche plus, que faire ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Verifiez d'abord que le probleme ne vient pas de votre connexion internet en testant un autre site. Si le probleme persiste, contactez-nous immediatement via le formulaire ci-dessous ou par telephone. Nous intervenons generalement sous 2h ouvrees pour tout probleme d'accessibilite.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Ma fiche Google affiche des informations incorrectes</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Les informations sur Google Business Profile peuvent etre modifiees par des suggestions de tiers ou par Google lui-meme. Signalez-nous immediatement les erreurs constatees et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je n'arrive pas a acceder a mon tableau de bord</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Essayez de reinitialiser votre mot de passe via le lien "Mot de passe oublie" sur la page de connexion. Verifiez aussi vos spams. Si le probleme persiste, contactez notre support avec l'adresse email associee a votre compte et nous vous renverrons vos acces sous 24h.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Mon site s'affiche lentement, est-ce normal ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                La vitesse de chargement depend de plusieurs facteurs : poids des images, hebergement, et connexion de l'utilisateur. Nous optimisons regulierement les performances de votre site (compression d'images, mise en cache). Si vous constatez une lenteur inhabituelle, signalez-le nous et nous lancerons un audit technique.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Ma fiche Google a ete suspendue, que faire ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non verifiee, activite jugee suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procedure de reactivation aupres de Google. Le delai de retablissement est generalement de 3 a 7 jours ouvres.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Les premiers résultats apparaissent généralement entre 4 et 8 semaines après le lancement. Le référencement local est un travail progressif : les positions s'améliorent de mois en mois. Nous vous envoyons un rapport mensuel détaillé pour suivre votre progression.
-                    </div></div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Comment lire mon rapport de performance mensuel ?</span>
-                        <span class="chevron">▼</span>
+                    <!-- Resultats -->
+                    <div class="faq-category" data-cat="resultats">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                            <h3 class="faq-category-title">Resultats & Performances</h3>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Au bout de combien de temps vais-je voir des resultats ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Les premiers resultats apparaissent generalement entre 4 et 8 semaines apres le lancement. Le referencement local est un travail progressif : les positions s'ameliorent de mois en mois. Nous vous envoyons un rapport mensuel detaille pour suivre votre progression.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Comment lire mon rapport de performance mensuel ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Votre rapport contient : vos positions sur les mots-cles cibles, le nombre de vues de votre fiche Google, les appels et demandes d'itineraire recus, et les actions realisees par notre equipe durant le mois. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Mes positions ont baisse, est-ce normal ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Des fluctuations ponctuelles sont normales, notamment lors des mises a jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus de 2 semaines, contactez-nous : nous analyserons la situation et ajusterons la strategie si necessaire.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Qu'est-ce que le "Pack Local" Google ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Le Pack Local est l'encadre avec la carte Google Maps qui apparait en haut des resultats de recherche pour les requetes locales (ex : "plombier Paris 15"). Y apparaitre est l'objectif principal de notre travail : c'est la que 42% des clics se concentrent.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Les resultats Google varient selon votre localisation exacte, votre historique de navigation et l'appareil utilise. Pour un test fiable, utilisez une fenetre de navigation privee et verifiez depuis differentes adresses. Notre rapport mensuel utilise des outils professionnels qui mesurent vos positions de maniere objective et neutre.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Votre rapport contient : vos positions sur les mots-clés ciblés, le nombre de vues de votre fiche Google, les appels et demandes d'itinéraire reçus, et les actions réalisées par notre équipe durant le mois. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur.
-                    </div></div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Mes positions ont baissé, est-ce normal ?</span>
-                        <span class="chevron">▼</span>
+                    <!-- Facturation -->
+                    <div class="faq-category" data-cat="facturation">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                            <h3 class="faq-category-title">Facturation & Paiement</h3>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Ou puis-je retrouver mes factures ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Vos factures vous sont envoyees par email chaque mois apres prelevement. Vous pouvez egalement les retrouver dans votre espace client, rubrique "Mes factures". Si vous avez besoin d'un duplicata, contactez-nous avec votre numero client.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Quels sont les moyens de paiement acceptes ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Nous acceptons le prelevement SEPA (recommande pour sa simplicite), la carte bancaire et le virement bancaire. Le prelevement SEPA est mis en place lors de votre inscription et garantit la continuite de service sans interruption.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Mon prelevement a ete rejete, que se passe-t-il ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                En cas de rejet, nous vous contactons sous 48h pour regulariser la situation. Verifiez que votre compte est suffisamment approvisionne. Apres 2 rejets consecutifs, le service peut etre temporairement suspendu. Contactez-nous rapidement pour eviter toute interruption.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Puis-je changer de formule ou de duree d'engagement ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Oui, vous pouvez evoluer vers une formule superieure a tout moment. Le changement prend effet au prochain cycle de facturation. Pour un passage a une formule inferieure, celui-ci s'appliquera a la fin de votre periode d'engagement en cours. Contactez votre conseiller pour etudier les options.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>A quelle date suis-je preleve chaque mois ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Le prelevement a lieu a la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous etes preleve le 15 de chaque mois). Cette date est indiquee sur votre contrat et sur chaque facture. En cas de jour non ouvre, le prelevement passe au jour ouvre suivant.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Des fluctuations ponctuelles sont normales, notamment lors des mises à jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus de 2 semaines, contactez-nous : nous analyserons la situation et ajusterons la stratégie si nécessaire.
-                    </div></div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Qu'est-ce que le « Pack Local » Google ?</span>
-                        <span class="chevron">▼</span>
+                    <!-- Resiliation -->
+                    <div class="faq-category" data-cat="resiliation">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                            <h3 class="faq-category-title">Churn & Resiliation</h3>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Comment resilier mon abonnement ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                La resiliation se fait par email a support@beevisible.fr ou par courrier recommande avec un preavis de 30 jours. Indiquez votre numero client dans votre demande. Un conseiller vous contactera pour confirmer la procedure et vous proposer des alternatives si vous le souhaitez.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Que se passe-t-il apres la resiliation ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Apres resiliation, nous cessons le travail de referencement. Vous conservez l'acces a votre fiche Google et a votre site web. Attention : sans maintenance continue, vos positions risquent de baisser progressivement face a la concurrence. Nous vous remettrons un document recapitulatif de tout le travail effectue.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Y a-t-il des frais de resiliation ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Si vous etes en periode d'engagement (12 ou 24 mois), des frais correspondant aux mois restants peuvent s'appliquer selon les conditions de votre contrat. Sans engagement, aucun frais de resiliation ne s'applique au-dela du preavis de 30 jours.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je ne suis pas satisfait des resultats, quelles sont mes options ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Avant d'envisager une resiliation, nous vous invitons a en discuter avec votre conseiller. Nous pouvons ajuster la strategie, intensifier certaines actions ou revoir les mots-cles cibles. Un rendez-vous bilan peut etre planifie a tout moment pour faire le point sur votre situation et trouver des solutions adaptees.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Puis-je suspendre mon abonnement temporairement ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                La suspension temporaire n'est pas proposee en standard, car le referencement necessite un travail continu pour maintenir vos positions. Toutefois, dans certains cas exceptionnels (travaux, fermeture temporaire), nous pouvons etudier un amenagement. Contactez votre conseiller pour en discuter.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Le Pack Local est l'encadré avec la carte Google Maps qui apparaît en haut des résultats de recherche pour les requêtes locales (ex : « plombier Paris 15 »). Y apparaître est l'objectif principal de notre travail : c'est là que 42% des clics se concentrent.
-                    </div></div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?</span>
-                        <span class="chevron">▼</span>
+                    <!-- Onboarding -->
+                    <div class="faq-category" data-cat="onboarding">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                            <h3 class="faq-category-title">Onboarding (Demarrage)</h3>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Quelles sont les etapes apres ma souscription ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                1) Vous recevez un email de bienvenue avec un questionnaire a completer. 2) Un appel de lancement est planifie avec votre consultant dedie. 3) Nous configurons et optimisons votre fiche Google et votre site. 4) Le travail de referencement demarre sous 5 jours ouvres apres reception de vos informations.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Quels acces devez-vous me fournir ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Nous avons besoin de l'acces administrateur a votre fiche Google Business Profile et, si applicable, les acces a votre site web (hebergement ou CMS). Toutes les instructions detaillees sont fournies dans le questionnaire d'onboarding que vous recevrez par email. Vos acces sont securises et utilises uniquement pour la prestation.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je n'ai pas encore de fiche Google, est-ce un probleme ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Pas du tout ! La creation et l'optimisation de votre fiche Google Business Profile font partie integrante de notre prestation. C'est meme l'un des tout premiers points que nous traitons lors de l'onboarding. Nous gerons tout de A a Z.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Combien de temps dure la phase d'onboarding ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                L'onboarding complet dure en moyenne 5 a 10 jours ouvres, selon la rapidite avec laquelle vous nous fournissez les acces et informations necessaires. L'appel de lancement a lieu dans les 48h suivant votre souscription, et le travail technique demarre immediatement apres.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Qui est mon interlocuteur dedie ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Des votre souscription, un consultant dedie vous est attribue. Il sera votre point de contact unique pour toute question ou demande. Son nom et ses coordonnees vous sont communiques dans l'email de bienvenue. Vous pouvez le joindre par email ou par telephone aux heures de bureau.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Les résultats Google varient selon votre localisation exacte, votre historique de navigation et l'appareil utilisé. Pour un test fiable, utilisez une fenêtre de navigation privée et vérifiez depuis différentes adresses. Notre rapport mensuel utilise des outils professionnels qui mesurent vos positions de manière objective et neutre.
-                    </div></div>
-                </div>
-            </div>
 
-            <!-- 💰 Facturation & Paiement -->
-            <div class="faq-category" data-cat="facturation">
-                <h3 class="faq-category-title">💰 Facturation & Paiement</h3>
+                    <!-- Modification -->
+                    <div class="faq-category" data-cat="modification">
+                        <div class="faq-category-header">
+                            <div class="faq-cat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+                            <h3 class="faq-category-title">Modification (Infos & Contenu)</h3>
+                        </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Où puis-je retrouver mes factures ?</span>
-                        <span class="chevron">▼</span>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je souhaite modifier mes horaires ou mon adresse</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons a jour votre fiche Google et votre site sous 24h ouvrees. Pensez a nous prevenir aussi pour les horaires exceptionnels (jours feries, conges annuels, travaux).
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Puis-je ajouter des photos a ma fiche Google ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Oui, et c'est meme fortement recommande ! Envoyez-nous vos photos en haute qualite (minimum 720px de large, format JPG ou PNG) et nous les ajouterons a votre fiche. Les fiches avec des photos recentes recoivent en moyenne 42% de demandes d'itineraire en plus.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je veux modifier le contenu de mon site web</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Les modifications mineures (textes, photos, coordonnees) sont incluses dans votre abonnement et traitees sous 48h. Pour des modifications structurelles (nouvelles pages, refonte de design), un devis complementaire pourra etre propose. Decrivez vos besoins via le formulaire de contact.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Comment ajouter ou modifier mes services sur ma fiche Google ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Envoyez-nous la liste complete de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons a jour la section "Services" de votre fiche Google sous 24h. Une fiche bien detaillee avec tous vos services ameliore votre visibilite sur les recherches specifiques.
+                            </div></div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span>Je change de numero de telephone, comment mettre a jour ?</span>
+                                <span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+                            </div>
+                            <div class="accordion-body"><div class="accordion-body-inner">
+                                Communiquez-nous votre nouveau numero des que possible. Nous le mettrons a jour sur votre fiche Google, votre site web et tous les annuaires ou vous etes reference. La coherence de vos informations (NAP : Nom, Adresse, Telephone) sur tous les supports est essentielle pour votre referencement local.
+                            </div></div>
+                        </div>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Vos factures vous sont envoyées par email chaque mois après prélèvement. Vous pouvez également les retrouver dans votre espace client, rubrique « Mes factures ». Si vous avez besoin d'un duplicata, contactez-nous avec votre numéro client.
-                    </div></div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Quels sont les moyens de paiement acceptés ?</span>
-                        <span class="chevron">▼</span>
+                    <div class="no-results" id="noResults">
+                        <div class="no-results-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <p style="font-weight:600;margin-bottom:6px;">Aucun resultat trouve</p>
+                        <p>Essayez d'autres mots-cles ou contactez-nous directement via le formulaire ci-dessous.</p>
                     </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Nous acceptons le prélèvement SEPA (recommandé pour sa simplicité), la carte bancaire et le virement bancaire. Le prélèvement SEPA est mis en place lors de votre inscription et garantit la continuité de service sans interruption.
-                    </div></div>
                 </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Mon prélèvement a été rejeté, que se passe-t-il ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        En cas de rejet, nous vous contactons sous 48h pour régulariser la situation. Vérifiez que votre compte est suffisamment approvisionné. Après 2 rejets consécutifs, le service peut être temporairement suspendu. Contactez-nous rapidement pour éviter toute interruption.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Puis-je changer de formule ou de durée d'engagement ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Oui, vous pouvez évoluer vers une formule supérieure à tout moment. Le changement prend effet au prochain cycle de facturation. Pour un passage à une formule inférieure, celui-ci s'appliquera à la fin de votre période d'engagement en cours. Contactez votre conseiller pour étudier les options.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>À quelle date suis-je prélevé chaque mois ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Le prélèvement a lieu à la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous êtes prélevé le 15 de chaque mois). Cette date est indiquée sur votre contrat et sur chaque facture. En cas de jour non ouvré, le prélèvement passe au jour ouvré suivant.
-                    </div></div>
-                </div>
-            </div>
-
-            <!-- ⚠️ Churn & Résiliation -->
-            <div class="faq-category" data-cat="resiliation">
-                <h3 class="faq-category-title">⚠️ Churn & Résiliation</h3>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Comment résilier mon abonnement ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        La résiliation se fait par email à support@beevisible.fr ou par courrier recommandé avec un préavis de 30 jours. Indiquez votre numéro client dans votre demande. Un conseiller vous contactera pour confirmer la procédure et vous proposer des alternatives si vous le souhaitez.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Que se passe-t-il après la résiliation ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Après résiliation, nous cessons le travail de référencement. Vous conservez l'accès à votre fiche Google et à votre site web. Attention : sans maintenance continue, vos positions risquent de baisser progressivement face à la concurrence. Nous vous remettrons un document récapitulatif de tout le travail effectué.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Y a-t-il des frais de résiliation ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Si vous êtes en période d'engagement (12 ou 24 mois), des frais correspondant aux mois restants peuvent s'appliquer selon les conditions de votre contrat. Sans engagement, aucun frais de résiliation ne s'applique au-delà du préavis de 30 jours.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je ne suis pas satisfait des résultats, quelles sont mes options ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Avant d'envisager une résiliation, nous vous invitons à en discuter avec votre conseiller. Nous pouvons ajuster la stratégie, intensifier certaines actions ou revoir les mots-clés ciblés. Un rendez-vous bilan peut être planifié à tout moment pour faire le point sur votre situation et trouver des solutions adaptées.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Puis-je suspendre mon abonnement temporairement ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        La suspension temporaire n'est pas proposée en standard, car le référencement nécessite un travail continu pour maintenir vos positions. Toutefois, dans certains cas exceptionnels (travaux, fermeture temporaire), nous pouvons étudier un aménagement. Contactez votre conseiller pour en discuter.
-                    </div></div>
-                </div>
-            </div>
-
-            <!-- 🚀 Onboarding (Démarrage) -->
-            <div class="faq-category" data-cat="onboarding">
-                <h3 class="faq-category-title">🚀 Onboarding (Démarrage)</h3>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Quelles sont les étapes après ma souscription ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        1) Vous recevez un email de bienvenue avec un questionnaire à compléter. 2) Un appel de lancement est planifié avec votre consultant dédié. 3) Nous configurons et optimisons votre fiche Google et votre site. 4) Le travail de référencement démarre sous 5 jours ouvrés après réception de vos informations.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Quels accès devez-vous me fournir ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Nous avons besoin de l'accès administrateur à votre fiche Google Business Profile et, si applicable, les accès à votre site web (hébergement ou CMS). Toutes les instructions détaillées sont fournies dans le questionnaire d'onboarding que vous recevrez par email. Vos accès sont sécurisés et utilisés uniquement pour la prestation.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je n'ai pas encore de fiche Google, est-ce un problème ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Pas du tout ! La création et l'optimisation de votre fiche Google Business Profile font partie intégrante de notre prestation. C'est même l'un des tout premiers points que nous traitons lors de l'onboarding. Nous gérons tout de A à Z.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Combien de temps dure la phase d'onboarding ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        L'onboarding complet dure en moyenne 5 à 10 jours ouvrés, selon la rapidité avec laquelle vous nous fournissez les accès et informations nécessaires. L'appel de lancement a lieu dans les 48h suivant votre souscription, et le travail technique démarre immédiatement après.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Qui est mon interlocuteur dédié ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Dès votre souscription, un consultant dédié vous est attribué. Il sera votre point de contact unique pour toute question ou demande. Son nom et ses coordonnées vous sont communiqués dans l'email de bienvenue. Vous pouvez le joindre par email ou par téléphone aux heures de bureau.
-                    </div></div>
-                </div>
-            </div>
-
-            <!-- 📝 Modification (Infos & Contenu) -->
-            <div class="faq-category" data-cat="modification">
-                <h3 class="faq-category-title">📝 Modification (Infos & Contenu)</h3>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je souhaite modifier mes horaires ou mon adresse</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons à jour votre fiche Google et votre site sous 24h ouvrées. Pensez à nous prévenir aussi pour les horaires exceptionnels (jours fériés, congés annuels, travaux).
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Puis-je ajouter des photos à ma fiche Google ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Oui, et c'est même fortement recommandé ! Envoyez-nous vos photos en haute qualité (minimum 720px de large, format JPG ou PNG) et nous les ajouterons à votre fiche. Les fiches avec des photos récentes reçoivent en moyenne 42% de demandes d'itinéraire en plus.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je veux modifier le contenu de mon site web</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Les modifications mineures (textes, photos, coordonnées) sont incluses dans votre abonnement et traitées sous 48h. Pour des modifications structurelles (nouvelles pages, refonte de design), un devis complémentaire pourra être proposé. Décrivez vos besoins via le formulaire de contact.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Comment ajouter ou modifier mes services sur ma fiche Google ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Envoyez-nous la liste complète de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons à jour la section « Services » de votre fiche Google sous 24h. Une fiche bien détaillée avec tous vos services améliore votre visibilité sur les recherches spécifiques.
-                    </div></div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span>Je change de numéro de téléphone, comment mettre à jour ?</span>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="accordion-body"><div class="accordion-body-inner">
-                        Communiquez-nous votre nouveau numéro dès que possible. Nous le mettrons à jour sur votre fiche Google, votre site web et tous les annuaires où vous êtes référencé. La cohérence de vos informations (NAP : Nom, Adresse, Téléphone) sur tous les supports est essentielle pour votre référencement local.
-                    </div></div>
-                </div>
-            </div>
-
-            <div class="no-results" id="noResults">
-                😕 Aucun résultat trouvé. Essayez d'autres mots-clés ou contactez-nous directement.
             </div>
         </div>
     </section>
 
-    <!-- ============ CONTACT FORM ============ -->
+    <!-- ============ CONTACT ============ -->
     <section class="contact-section" id="contact">
         <div class="container">
-            <h2>Vous n'avez pas trouvé votre réponse ?</h2>
-            <p>Envoyez-nous un message, nous vous répondons sous 24h ouvrées</p>
+            <div class="contact-wrapper reveal">
+                <div class="contact-header">
+                    <h2>Vous n'avez pas trouve votre reponse ?</h2>
+                    <p>Envoyez-nous un message, nous vous repondons sous 24h ouvrees</p>
+                </div>
 
-            <form class="contact-form" id="contactForm" novalidate>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Nom complet *</label>
-                        <input type="text" id="name" name="name" required placeholder="Jean Dupont">
-                        <span class="error-msg">Veuillez entrer votre nom</span>
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                            <span class="error-msg">Veuillez entrer votre nom</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="jean@exemple.fr">
+                            <span class="error-msg">Veuillez entrer un email valide</span>
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="jean@exemple.fr">
-                        <span class="error-msg">Veuillez entrer un email valide</span>
+                        <label for="category">Categorie *</label>
+                        <select id="category" name="category" required>
+                            <option value="">-- Selectionnez --</option>
+                            <option value="technique">Technique (Fiche Google & Site)</option>
+                            <option value="resultats">Resultats & Performances</option>
+                            <option value="facturation">Facturation & Paiement</option>
+                            <option value="onboarding">Onboarding (Demarrage)</option>
+                            <option value="modification">Modification (Infos & Contenu)</option>
+                            <option value="resiliation">Churn & Resiliation</option>
+                        </select>
+                        <span class="error-msg">Veuillez choisir une categorie</span>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="category">Catégorie *</label>
-                    <select id="category" name="category" required>
-                        <option value="">— Sélectionnez —</option>
-                        <option value="technique">🔧 Technique (Fiche Google & Site)</option>
-                        <option value="resultats">📊 Résultats & Performances</option>
-                        <option value="facturation">💰 Facturation & Paiement</option>
-                        <option value="onboarding">🚀 Onboarding (Démarrage)</option>
-                        <option value="modification">📝 Modification (Infos & Contenu)</option>
-                        <option value="resiliation">⚠️ Churn & Résiliation</option>
-                    </select>
-                    <span class="error-msg">Veuillez choisir une catégorie</span>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Decrivez votre probleme ou votre question..."></textarea>
+                        <span class="error-msg">Veuillez entrer votre message</span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="message">Message *</label>
-                    <textarea id="message" name="message" required placeholder="Décrivez votre problème ou votre question..."></textarea>
-                    <span class="error-msg">Veuillez entrer votre message</span>
-                </div>
+                    <button type="submit" class="btn-submit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        Envoyer ma demande
+                    </button>
 
-                <button type="submit" class="btn-submit">Envoyer ma demande</button>
-
-                <div class="form-success" id="formSuccess">
-                    ✅ Votre message a bien été envoyé ! Nous vous répondrons sous 24h ouvrées.
-                </div>
-            </form>
+                    <div class="form-success" id="formSuccess">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Votre message a bien ete envoye ! Nous vous repondrons sous 24h ouvrees.
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -929,12 +1619,16 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/FpKQJAgesKJXHiZAk2Cl/media/67c78e9c7c94cd55d58b5ed0.png" alt="BeeVisible">
+                    <p>Devenez vraiment visible la ou vos clients vous recherchent : Google, ChatGPT et les autres IA.</p>
+                </div>
                 <div>
                     <h4>BeeVisible</h4>
                     <ul>
                         <li><a href="https://beevisible.online">Site principal</a></li>
                         <li><a href="https://beevisible.online/blog">Blog</a></li>
-                        <li><a href="https://beevisible.online/temoignages">Témoignages</a></li>
+                        <li><a href="https://beevisible.online/temoignages">Temoignages</a></li>
                     </ul>
                 </div>
                 <div>
@@ -942,39 +1636,62 @@
                     <ul>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Nous contacter</a></li>
-                        <li>📞 01 23 45 67 89</li>
                     </ul>
                 </div>
                 <div>
-                    <h4>Horaires du support</h4>
-                    <ul>
-                        <li>Lundi – Vendredi</li>
-                        <li>9h00 – 18h00</li>
-                        <li>📧 support@beevisible.fr</li>
-                    </ul>
+                    <h4>Contact</h4>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        01 23 45 67 89
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        support@beevisible.fr
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        Lun-Ven 9h-18h
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2025 BeeVisible — Tous droits réservés
+                <span>&copy; 2025 BeeVisible -- Tous droits reserves</span>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions legales</a>
+                    <a href="#">Politique de confidentialite</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- ============ ZENDESK CHAT PLACEHOLDER ============ -->
-    <!-- Injecter le snippet Zendesk ici -->
-    <!-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=VOTRE_CLE"> </script> -->
-
     <!-- ============ JAVASCRIPT ============ -->
     <script>
     (function() {
-        // --- Accordions ---
+        /* --- Header scroll effect --- */
+        var header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', function() {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        /* --- Scroll reveal --- */
+        var reveals = document.querySelectorAll('.reveal');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(function(el) { observer.observe(el); });
+
+        /* --- Accordions --- */
         document.querySelectorAll('.accordion-header').forEach(function(header) {
             header.addEventListener('click', function() {
                 var item = this.parentElement;
                 var body = item.querySelector('.accordion-body');
                 var isOpen = item.classList.contains('open');
 
-                // Close all in same category
                 item.closest('.faq-category').querySelectorAll('.accordion-item.open').forEach(function(openItem) {
                     openItem.classList.remove('open');
                     openItem.querySelector('.accordion-body').style.maxHeight = null;
@@ -987,23 +1704,37 @@
             });
         });
 
-        // --- Category cards → scroll to FAQ ---
+        /* --- Category cards scroll --- */
         document.querySelectorAll('.cat-card').forEach(function(card) {
             card.addEventListener('click', function() {
                 var cat = this.dataset.category;
                 var target = document.querySelector('.faq-category[data-cat="' + cat + '"]');
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Open first accordion
-                    var first = target.querySelector('.accordion-item');
-                    if (first && !first.classList.contains('open')) {
-                        first.querySelector('.accordion-header').click();
-                    }
+                    setTimeout(function() {
+                        var first = target.querySelector('.accordion-item');
+                        if (first && !first.classList.contains('open')) {
+                            first.querySelector('.accordion-header').click();
+                        }
+                    }, 500);
                 }
             });
         });
 
-        // --- Search ---
+        /* --- Sidebar nav --- */
+        document.querySelectorAll('.faq-sidebar-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.faq-sidebar-link').forEach(function(l) { l.classList.remove('active'); });
+                this.classList.add('active');
+                var cat = this.dataset.target;
+                var target = document.querySelector('.faq-category[data-cat="' + cat + '"]');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        /* --- Search --- */
         var searchInput = document.getElementById('searchInput');
         var noResults = document.getElementById('noResults');
 
@@ -1023,14 +1754,10 @@
                 if (catVisible) anyVisible = true;
             });
 
-            if (query) {
-                noResults.classList.toggle('visible', !anyVisible);
-            } else {
-                noResults.classList.remove('visible');
-            }
+            noResults.classList.toggle('visible', query && !anyVisible);
         });
 
-        // --- Form Validation ---
+        /* --- Form --- */
         var form = document.getElementById('contactForm');
         var success = document.getElementById('formSuccess');
 
@@ -1038,40 +1765,29 @@
             e.preventDefault();
             var valid = true;
 
-            // Name
-            var nameGroup = document.getElementById('name').closest('.form-group');
-            if (!document.getElementById('name').value.trim()) {
-                nameGroup.classList.add('has-error'); valid = false;
-            } else { nameGroup.classList.remove('has-error'); }
+            var nameEl = document.getElementById('name');
+            var emailEl = document.getElementById('email');
+            var catEl = document.getElementById('category');
+            var msgEl = document.getElementById('message');
 
-            // Email
-            var emailGroup = document.getElementById('email').closest('.form-group');
-            var emailVal = document.getElementById('email').value.trim();
-            if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-                emailGroup.classList.add('has-error'); valid = false;
-            } else { emailGroup.classList.remove('has-error'); }
-
-            // Category
-            var catGroup = document.getElementById('category').closest('.form-group');
-            if (!document.getElementById('category').value) {
-                catGroup.classList.add('has-error'); valid = false;
-            } else { catGroup.classList.remove('has-error'); }
-
-            // Message
-            var msgGroup = document.getElementById('message').closest('.form-group');
-            if (!document.getElementById('message').value.trim()) {
-                msgGroup.classList.add('has-error'); valid = false;
-            } else { msgGroup.classList.remove('has-error'); }
+            [[nameEl, function(v){return !v.trim();}],
+             [emailEl, function(v){return !v.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}],
+             [catEl, function(v){return !v;}],
+             [msgEl, function(v){return !v.trim();}]
+            ].forEach(function(pair) {
+                var el = pair[0], check = pair[1];
+                var g = el.closest('.form-group');
+                if (check(el.value)) { g.classList.add('has-error'); valid = false; }
+                else { g.classList.remove('has-error'); }
+            });
 
             if (valid) {
-                // TODO: Connect to Zendesk / backend
                 form.reset();
                 success.classList.add('visible');
                 setTimeout(function() { success.classList.remove('visible'); }, 5000);
             }
         });
 
-        // Remove error on input
         form.querySelectorAll('input, select, textarea').forEach(function(el) {
             el.addEventListener('input', function() {
                 this.closest('.form-group').classList.remove('has-error');
