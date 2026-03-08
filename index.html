@@ -341,8 +341,80 @@
         }
 
         .search-box input:focus {
-            box-shadow: 0 0 0 3px var(--accent), 0 20px 60px rgba(0,0,0,0.25);
+            box-shadow: 0 0 0 3px rgba(1,77,128,0.3), 0 20px 60px rgba(0,0,0,0.25);
             transform: translateY(-2px);
+        }
+
+        /* Search suggestions dropdown */
+        .search-suggestions {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+            max-height: 340px;
+            overflow-y: auto;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(-8px);
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .search-suggestions.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .search-suggestions-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 22px;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-align: left;
+            font-size: 0.93rem;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-suggestions-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-suggestions-item:hover {
+            background: var(--bg);
+        }
+
+        .search-suggestions-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .search-suggestions-item mark {
+            background: rgba(1,77,128,0.12);
+            color: var(--primary);
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+
+        .search-suggestions-empty {
+            padding: 24px 22px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+
+        .search-suggestions-empty a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: underline;
         }
 
         .search-box .search-icon {
@@ -1075,6 +1147,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     </span>
                     <input type="text" id="searchInput" placeholder="Tapez votre question ici..." autocomplete="off">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
@@ -1734,14 +1807,89 @@
             });
         });
 
-        /* --- Search --- */
+        /* --- Search with live suggestions --- */
         var searchInput = document.getElementById('searchInput');
         var noResults = document.getElementById('noResults');
+        var suggestionsBox = document.getElementById('searchSuggestions');
+
+        // Build index of all FAQ questions
+        var faqItems = [];
+        document.querySelectorAll('.accordion-item').forEach(function(item) {
+            var questionEl = item.querySelector('.accordion-header span');
+            if (questionEl) {
+                faqItems.push({
+                    text: questionEl.textContent,
+                    element: item
+                });
+            }
+        });
+
+        function highlightMatch(text, query) {
+            var idx = text.toLowerCase().indexOf(query.toLowerCase());
+            if (idx === -1) return text;
+            return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + query.length) + '</mark>' + text.slice(idx + query.length);
+        }
+
+        function showSuggestions(query) {
+            if (!query) {
+                suggestionsBox.classList.remove('visible');
+                suggestionsBox.innerHTML = '';
+                return;
+            }
+
+            var matches = faqItems.filter(function(item) {
+                return item.text.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+            });
+
+            if (matches.length === 0) {
+                suggestionsBox.innerHTML = '<div class="search-suggestions-empty">Aucun résultat trouvé — <a href="#contact">contactez-nous</a></div>';
+            } else {
+                suggestionsBox.innerHTML = matches.slice(0, 8).map(function(m, i) {
+                    return '<div class="search-suggestions-item" data-index="' + faqItems.indexOf(m) + '">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
+                        '<span>' + highlightMatch(m.text, query) + '</span></div>';
+                }).join('');
+            }
+
+            suggestionsBox.classList.add('visible');
+        }
+
+        suggestionsBox.addEventListener('click', function(e) {
+            var item = e.target.closest('.search-suggestions-item');
+            if (!item) return;
+            var idx = parseInt(item.dataset.index);
+            var faq = faqItems[idx];
+            if (!faq) return;
+
+            // Hide suggestions
+            suggestionsBox.classList.remove('visible');
+            searchInput.value = '';
+
+            // Reset FAQ visibility
+            document.querySelectorAll('.faq-category').forEach(function(cat) {
+                cat.style.display = '';
+                cat.querySelectorAll('.accordion-item').forEach(function(ai) { ai.style.display = ''; });
+            });
+            noResults.classList.remove('visible');
+
+            // Scroll to the item and open it
+            var target = faq.element;
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(function() {
+                if (!target.classList.contains('open')) {
+                    target.querySelector('.accordion-header').click();
+                }
+            }, 400);
+        });
 
         searchInput.addEventListener('input', function() {
             var query = this.value.toLowerCase().trim();
             var anyVisible = false;
 
+            // Live suggestions
+            showSuggestions(query);
+
+            // Also filter FAQ section
             document.querySelectorAll('.faq-category').forEach(function(cat) {
                 var catVisible = false;
                 cat.querySelectorAll('.accordion-item').forEach(function(item) {
@@ -1755,6 +1903,18 @@
             });
 
             noResults.classList.toggle('visible', query && !anyVisible);
+        });
+
+        // Close suggestions on click outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-box')) {
+                suggestionsBox.classList.remove('visible');
+            }
+        });
+
+        // Reopen suggestions on focus if there's a query
+        searchInput.addEventListener('focus', function() {
+            if (this.value.trim()) showSuggestions(this.value.trim());
         });
 
         /* --- Form --- */
