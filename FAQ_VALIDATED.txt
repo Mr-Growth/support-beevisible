@@ -1,0 +1,127 @@
+ï»¿FAQ BeeVisible â Support Client
+Modifie les questions et rÃ©ponses ci-dessous. Quand c'est validÃ© â dis GO et je mets le site Ã  jour.
+
+
+
+
+ð§ Technique (Fiche Google & Site)
+Q1: Mon site ne s'affiche plus, que faire ?
+VÃ©rifiez d'abord que le problÃ¨me ne vient pas de votre connexion internet en testant un autre site. Si le problÃ¨me persiste, contactez-nous immÃ©diatement via le formulaire ci-dessous ou par tÃ©lÃ©phone. Nous intervenons gÃ©nÃ©ralement sous 2h ouvrÃ©es pour tout problÃ¨me d'accessibilitÃ©.
+Q2: Ma fiche Google affiche des informations incorrectes
+Les informations sur Google Business Profile peuvent Ãªtre modifiÃ©es par des suggestions de tiers ou par Google lui-mÃªme. Signalez-nous immÃ©diatement les erreurs constatÃ©es et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
+Q3: Je n'arrive pas Ã  accÃ©der Ã  mon tableau de bord
+Le lien dâaccÃ¨s au tableau de bord est https://app.beevisible.online. Essayez de rÃ©initialiser votre mot de passe via le lien "Mot de passe oubliÃ©" sur la page de connexion. VÃ©rifiez aussi vos spams. Si le problÃ¨me persiste, contactez notre support avec l'adresse email associÃ©e Ã  votre compte et nous vous renverrons vos accÃ¨s sous 24h.
+Q4: Mon site s'affiche lentement, est-ce normal ?
+La vitesse de chargement dÃ©pend de plusieurs facteurs : poids des images, hÃ©bergement, et connexion de l'utilisateur. Nous optimisons rÃ©guliÃ¨rement les performances de votre site (compression d'images, mise en cache). Si vous constatez une lenteur inhabituelle, signalez-le nous et nous lancerons un audit technique.
+Q5: Ma fiche Google a Ã©tÃ© suspendue, que faire ?
+Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non vÃ©rifiÃ©e, activitÃ© jugÃ©e suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procÃ©dure de rÃ©activation auprÃ¨s de Google. Le dÃ©lai de rÃ©tablissement est gÃ©nÃ©ralement de 3 Ã  7 jours ouvrÃ©s.
+
+
+ð RÃ©sultats & Performances
+Q6: Au bout de combien de temps vais-je voir des rÃ©sultats ?
+Les premiers rÃ©sultats apparaissent gÃ©nÃ©ralement entre 4 et 8 semaines aprÃ¨s la mise en place de lâecosysteme BeeVisible. Le rÃ©fÃ©rencement local est un travail progressif : les positions s'amÃ©liorent de mois en mois. Nous vous envoyons un rapport mensuel dÃ©taillÃ© pour suivre votre progression.
+Q7: Comment lire mon rapport de performance mensuel ?
+Votre rapport contient : vos positions sur les mots-clÃ©s cibles, le nombre de vues de votre fiche Google, les appels et demandes d'itinÃ©raire reÃ§us. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur.
+Q8: Mes positions ont baissÃ©, est-ce normal ?
+Des fluctuations ponctuelles sont normales, notamment lors des mises Ã  jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus dâun mois, contactez-nous : nous analyserons la situation et ajusterons la stratÃ©gie si nÃ©cessaire.
+Q9: Qu'est-ce que le "Pack Local" Google ?
+Le Pack Local est l'encadrÃ© avec la carte Google Maps qui apparaÃ®t en haut des rÃ©sultats de recherche pour les requÃªtes locales (ex : "plombier Paris 15"). Y apparaÃ®tre est l'objectif principal de notre travail : c'est lÃ  que 42% des clics se concentrent.
+Q10: Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?
+Les rÃ©sultats Google varient selon votre localisation exacte, votre historique de navigation et l'appareil utilisÃ©. Pour un test fiable, utilisez une fenÃªtre de navigation privÃ©e et vÃ©rifiez depuis diffÃ©rentes adresses. Notre rapport mensuel utilise des outils professionnels qui mesurent vos positions de maniÃ¨re objective et neutre.
+ð° Facturation & Paiement
+Q11: OÃ¹ puis-je retrouver mes factures ?
+Vos factures vous sont envoyÃ©es par email chaque mois aprÃ¨s prÃ©lÃ¨vement. Vous pouvez Ã©galement les retrouver dans votre espace client, rubrique "Mes factures". Si vous avez besoin d'un duplicata, contactez-nous avec votre numÃ©ro client.
+Q12: Quels sont les moyens de paiement acceptÃ©s ?
+Nous acceptons Visa/ mastercard et le prÃ©lÃ¨vement SEPA, la carte bancaire. Nous vous conseillons le paiement par carte bancaire pour Ã©viter toute interruption de service liÃ© au dÃ©lais des prelevements SEPA
+Q13: Mon prÃ©lÃ¨vement a Ã©tÃ© rejetÃ©, que se passe-t-il ?
+En cas de rejet, nous vous contactons sous 48h pour rÃ©gulariser la situation. VÃ©rifiez que votre compte est suffisamment approvisionnÃ©. AprÃ¨s 2 rejets consÃ©cutifs, le service peut Ãªtre temporairement suspendu. Contactez-nous rapidement pour Ã©viter toute interruption.
+Q14: Puis-je changer de formule ?
+Oui, vous pouvez Ã©voluer vers une formule supÃ©rieure Ã  tout moment. Le changement prend effet au prochain cycle de facturation. Pour un passage Ã  une formule infÃ©rieure, celui-ci s'appliquera Ã  la fin de votre pÃ©riode d'engagement en cours. Contactez votre conseiller pour Ã©tudier les options.
+Q15: Ã quelle date suis-je prÃ©levÃ© chaque mois ?
+Le prÃ©lÃ¨vement a lieu Ã  la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous Ãªtes prÃ©levÃ© le 15 de chaque mois). Cette date est indiquÃ©e sur votre contrat et sur chaque facture. En cas de jour non ouvrÃ©, le prÃ©lÃ¨vement passe au jour ouvrÃ© suivant.
+â ï¸ Churn & RÃ©siliation (Supprimer cette rubrique et mettre les question dans facturation)
+Q16: Comment rÃ©silier mon abonnement ?
+La rÃ©siliation se fait par email Ã  succes-client@beevisible.online ou par courrier recommandÃ© avec un prÃ©avis de 30 jours. Indiquez votre numÃ©ro client dans votre demande. Un conseiller vous contactera pour confirmer la procÃ©dure et vous proposer des alternatives si vous le souhaitez.
+ð Onboarding (DÃ©marrage)
+Q21: Quelles sont les Ã©tapes aprÃ¨s ma souscription ?
+1) Vous recevez un email de bienvenue avec un questionnaire Ã  complÃ©ter. 
+2) Un appel de lancement est planifiÃ© avec votre consultant dÃ©diÃ©. 
+3) Nous configurons et optimisons votre fiche Google et votre site. 
+4) Le travail de rÃ©fÃ©rencement dÃ©marre sous 5 jours ouvrÃ©s aprÃ¨s rÃ©ception de vos informations.
+Q22: Quels accÃ¨s dois-je vous fournir ?
+Nous avons besoin de l'accÃ¨s administrateur Ã  votre fiche Google Business Profile. Toutes les instructions dÃ©taillÃ©es sont fournies dans le questionnaire d'onboarding que vous recevrez par email. Vos accÃ¨s sont sÃ©curisÃ©s et utilisÃ©s uniquement pour la prestation.
+Q23: Je n'ai pas encore de fiche Google, est-ce un problÃ¨me ?
+Pas du tout ! La crÃ©ation et l'optimisation de votre fiche Google Business Profile font partie intÃ©grante de notre prestation. C'est mÃªme l'un des tout premiers points que nous traitons lors de l'onboarding. Nous gÃ©rons tout de A Ã  Z.
+Q24: Combien de temps dure la phase d'onboarding ?
+L'onboarding complet dure en moyenne 5 Ã  10 jours ouvrÃ©s, selon la rapiditÃ© avec laquelle vous nous fournissez les accÃ¨s et informations nÃ©cessaires. L'appel de bienvenu a lieu dans les 48h suivant votre souscription, et le travail technique dÃ©marre immÃ©diatement aprÃ¨s.
+âï¸ Modification (Infos & Contenu)
+Q26: Je souhaite modifier mes horaires ou mon adresse
+Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons Ã  jour votre fiche Google et votre site sous 24h ouvrÃ©es. Pensez Ã  nous prÃ©venir aussi pour les horaires exceptionnels (jours fÃ©riÃ©s, congÃ©s annuels, travaux).
+Q27: Puis-je ajouter des photos Ã  ma fiche Google ?
+Oui, et c'est mÃªme fortement recommandÃ© ! Envoyez-nous vos photos en haute qualitÃ© (minimum 720px de large, format JPG ou PNG) et nous les ajouterons Ã  votre fiche. Les fiches avec des photos rÃ©centes reÃ§oivent en moyenne 42% de demandes d'itinÃ©raire en plus.
+Q28: Je veux modifier le contenu de mon site web
+Les modifications mineures (textes, photos, coordonnÃ©es) sont incluses dans votre abonnement et traitÃ©es sous 48h. Pour des modifications structurelles (nouvelles pages, refonte de design), un devis complÃ©mentaire pourra Ãªtre proposÃ©. DÃ©crivez vos besoins via le formulaire de contact.
+Q29: Comment ajouter ou modifier mes services sur ma fiche Google ?
+Envoyez-nous la liste complÃ¨te de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons Ã  jour la section "Services" de votre fiche Google sous 24h. Une fiche bien dÃ©taillÃ©e avec tous vos services amÃ©liore votre visibilitÃ© sur les recherches spÃ©cifiques.
+Q30: Je change de numÃ©ro de tÃ©lÃ©phone, comment mettre Ã  jour ?
+Communiquez-nous votre nouveau numÃ©ro dÃ¨s que possible. Nous le mettrons Ã  jour sur votre fiche Google, votre site web et tous les annuaires oÃ¹ vous Ãªtes rÃ©fÃ©rencÃ©. La cohÃ©rence de vos informations (NAP : Nom, Adresse, TÃ©lÃ©phone) sur tous les supports est essentielle pour votre rÃ©fÃ©rencement local.
+
+
+
+
+
+
+---
+
+
+## ð» Utiliser votre plateforme BeeVisible
+
+
+### Q31: Comment configurer mon calendrier de prise de rendez-vous ?
+Rendez-vous dans la section Calendrier de votre plateforme. Vous pouvez y dÃ©finir vos disponibilitÃ©s, la durÃ©e de vos rendez-vous, et les crÃ©neaux horaires proposÃ©s Ã  vos clients. Une fois configurÃ©, vous recevrez un lien de rÃ©servation que vous pouvez partager par email, sur votre site ou via vos rÃ©seaux sociaux. Vos clients pourront alors rÃ©server directement en ligne et vous recevrez une notification automatique.
+
+
+### Q32: Comment voir et gÃ©rer mes contacts dans le CRM ?
+Dans le menu principal, accÃ©dez Ã  Contacts pour voir l'ensemble de vos prospects et clients. Vous pouvez filtrer, rechercher, ajouter des notes, des tags ou crÃ©er des tÃ¢ches de suivi. Chaque contact dispose d'une fiche dÃ©taillÃ©e oÃ¹ vous retrouvez l'historique des Ã©changes, les rendez-vous passÃ©s et Ã  venir, et toutes les interactions.
+
+
+### Q33: Comment planifier mes publications sur les rÃ©seaux sociaux ?
+La section Calendrier de contenu vous permet de crÃ©er et programmer vos publications Facebook, Instagram et Google. RÃ©digez votre texte, ajoutez vos images ou vidÃ©os, puis choisissez la date et l'heure de publication. Vous pouvez prÃ©parer plusieurs semaines de contenu Ã  l'avance. Vos publications seront diffusÃ©es automatiquement aux dates programmÃ©es.
+
+
+### Q34: Comment modifier mon site web moi-mÃªme ?
+AccÃ©dez Ã  Sites dans votre plateforme, puis cliquez sur votre site. Le constructeur visuel vous permet de modifier textes, images et sections par simple glisser-dÃ©poser. Cliquez sur n'importe quel Ã©lÃ©ment pour le modifier directement. N'oubliez pas de cliquer sur Enregistrer puis Publier pour que vos modifications soient visibles en ligne.
+
+
+### Q35: Comment gÃ©rer et rÃ©pondre aux avis clients ?
+Dans la section RÃ©putation, vous retrouvez tous les avis laissÃ©s sur Google, Facebook et autres plateformes. Vous pouvez rÃ©pondre directement depuis votre espace client sans avoir Ã  vous connecter sur chaque plateforme. RÃ©pondre aux avis (positifs comme nÃ©gatifs) montre votre professionnalisme et amÃ©liore votre visibilitÃ© en ligne.
+
+
+### Q36: Comment lire mes statistiques et rÃ©sultats ?
+Le Tableau de bord (disponible dÃ¨s la page d'accueil) affiche vos indicateurs clÃ©s : nombre de nouveaux contacts, rendez-vous pris, taux d'ouverture des emails, performances des campagnes. Consultez-le rÃ©guliÃ¨rement pour suivre vos progrÃ¨s et identifier ce qui fonctionne le mieux pour votre entreprise.
+
+
+### Q37: Comment voir et rÃ©pondre aux messages de mes clients ?
+La section Conversations centralise tous les Ã©changes : SMS, emails, messages Facebook/Instagram, webchat. Vous n'avez plus besoin de jongler entre plusieurs applications. Cliquez sur une conversation pour voir l'historique complet et rÃ©pondre directement. Vos clients reÃ§oivent votre rÃ©ponse sur le canal qu'ils ont utilisÃ©.
+
+
+
+
+
+
+---
+
+
+## ð Suivi & Accompagnement
+
+
+### Q39: Comment se passe le suivi de mon dossier ?
+BeeVisible est une solution technologique de rÃ©fÃ©rencement local. ConcrÃ¨tement : vous bÃ©nÃ©ficiez d'un rendez-vous stratÃ©gique tous les 3 mois avec un expert du rÃ©fÃ©rencement local pour faire le point sur vos rÃ©sultats et ajuster la stratÃ©gie. Entre ces rendez-vous, vous recevez automatiquement votre rapport de performance par email le 15 de chaque mois, et vous pouvez consulter vos rÃ©sultats en temps rÃ©el Ã  tout moment sur votre plateforme BeeVisible (app.beevisible.online).
+
+
+### Q40: Ã quelle frÃ©quence ai-je un rendez-vous avec un expert ?
+Un rendez-vous stratÃ©gique est programmÃ© tous les 3 mois avec un expert du rÃ©fÃ©rencement local. Ce rendez-vous permet de faire le bilan de vos rÃ©sultats, d'ajuster les mots-clÃ©s et la stratÃ©gie si nÃ©cessaire, et de rÃ©pondre Ã  toutes vos questions. Entre ces rendez-vous, notre Ã©quipe travaille en continu sur votre visibilitÃ©.
+
+
+### Q41: Comment suivre mes rÃ©sultats entre deux rendez-vous ?
+Deux moyens complÃ©mentaires : 1) Votre rapport mensuel vous est envoyÃ© automatiquement par email le 15 de chaque mois avec un rÃ©capitulatif complet de vos performances. 2) Votre plateforme BeeVisible (app.beevisible.online) affiche vos statistiques en temps rÃ©el â vous pouvez la consulter Ã  tout moment pour voir vos positions, vos avis, et vos indicateurs clÃ©s.

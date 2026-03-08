@@ -1,0 +1,129 @@
+{
+  "categories": [
+    {
+      "name": "Technique (Fiche Google & Site)",
+      "questions": [
+        {
+          "question": "Mon site ne s'affiche plus, que faire ?",
+          "answer": "Vérifiez d'abord que le problème ne vient pas de votre connexion internet en testant un autre site. Si le problème persiste, contactez-nous immédiatement via le formulaire ci-dessous ou par téléphone. Nous intervenons généralement sous 2h ouvrées pour tout problème d'accessibilité."
+        },
+        {
+          "question": "Ma fiche Google affiche des informations incorrectes",
+          "answer": ""
+        },
+        {
+          "question": "Je n'arrive pas à accéder à mon tableau de bord",
+          "answer": "Le lien d’accès au tableau de bord est https://app.beevisible.online. Essayez de réinitialiser votre mot de passe via le lien \"Mot de passe oublié\" sur la page de connexion. Vérifiez aussi vos spams. Si le problème persiste, contactez notre support avec l'adresse email associée à votre compte et nous vous renverrons vos accès sous 24h."
+        },
+        {
+          "question": "Mon site s'affiche lentement, est-ce normal ?",
+          "answer": ""
+        },
+        {
+          "question": "Ma fiche Google a été suspendue, que faire ?",
+          "answer": "Une suspension de fiche Google peut survenir pour non-respect des consignes (adresse non vérifiée, activité jugée suspecte par Google, etc.). Contactez-nous en urgence : nous analyserons la cause et lancerons la procédure de réactivation auprès de Google. Le délai de rétablissement est généralement de 3 à 7 jours ouvrés."
+        }
+      ]
+    },
+    {
+      "name": "Résultats & Performances",
+      "questions": [
+        {
+          "question": "Au bout de combien de temps vais-je voir des résultats ?",
+          "answer": ""
+        },
+        {
+          "question": "Comment lire mon rapport de performance mensuel ?",
+          "answer": "Votre rapport contient : vos positions sur les mots-clés cibles, le nombre de vues de votre fiche Google, les appels et demandes d'itinéraire reçus. Un code couleur vert/orange/rouge vous indique la tendance de chaque indicateur."
+        },
+        {
+          "question": "Mes positions ont baissé, est-ce normal ?",
+          "answer": "Des fluctuations ponctuelles sont normales, notamment lors des mises à jour de l'algorithme Google (qui ont lieu plusieurs fois par an). Si la baisse persiste plus d’un mois, contactez-nous : nous analyserons la situation et ajusterons la stratégie si nécessaire."
+        },
+        {
+          "question": "Qu'est-ce que le \"Pack Local\" Google ?",
+          "answer": ""
+        },
+        {
+          "question": "Pourquoi je ne vois pas ma fiche quand je me cherche sur Google ?",
+          "answer": ""
+        }
+      ]
+    },
+    {
+      "name": "Facturation & Paiement",
+      "questions": [
+        {
+          "question": "Où puis-je retrouver mes factures ?",
+          "answer": "Vos factures vous sont envoyées par email chaque mois après prélèvement. Vous pouvez également les retrouver dans votre espace client, rubrique \"Mes factures\". Si vous avez besoin d'un duplicata, contactez-nous avec votre numéro client."
+        },
+        {
+          "question": "Quels sont les moyens de paiement acceptés ?",
+          "answer": "Nous acceptons Visa/ mastercard et le prélèvement SEPA, la carte bancaire. Nous vous conseillons le paiement par carte bancaire pour éviter toute interruption de service lié au délais des prelevements SEPA"
+        },
+        {
+          "question": "Mon prélèvement a été rejeté, que se passe-t-il ?",
+          "answer": "En cas de rejet, nous vous contactons sous 48h pour régulariser la situation. Vérifiez que votre compte est suffisamment approvisionné. Après 2 rejets consécutifs, le service peut être temporairement suspendu. Contactez-nous rapidement pour éviter toute interruption."
+        },
+        {
+          "question": "Puis-je changer de formule ?",
+          "answer": ""
+        },
+        {
+          "question": "À quelle date suis-je prélevé chaque mois ?",
+          "answer": "Le prélèvement a lieu à la date anniversaire de votre souscription (ex : si vous avez souscrit le 15, vous êtes prélevé le 15 de chaque mois). Cette date est indiquée sur votre contrat et sur chaque facture. En cas de jour non ouvré, le prélèvement passe au jour ouvré suivant."
+        },
+        {
+          "question": "Comment résilier mon abonnement ?",
+          "answer": "La résiliation se fait par email à succes-client@beevisible.online ou par courrier recommandé avec un préavis de 30 jours. Indiquez votre numéro client dans votre demande. Un conseiller vous contactera pour confirmer la procédure et vous proposer des alternatives si vous le souhaitez."
+        }
+      ]
+    },
+    {
+      "name": "Onboarding (Démarrage)",
+      "questions": [
+        {
+          "question": "Quelles sont les étapes après ma souscription ?",
+          "answer": "1) Vous recevez un email de bienvenue avec un questionnaire à compléter. \u000b2) Un appel de lancement est planifié avec votre consultant dédié. \u000b3) Nous configurons et optimisons votre fiche Google et votre site. \u000b4) Le travail de référencement démarre sous 5 jours ouvrés après réception de vos informations."
+        },
+        {
+          "question": "Quels accès dois-je vous fournir ?",
+          "answer": ""
+        },
+        {
+          "question": "Je n'ai pas encore de fiche Google, est-ce un problème ?",
+          "answer": ""
+        },
+        {
+          "question": "Combien de temps dure la phase d'onboarding ?",
+          "answer": ""
+        }
+      ]
+    },
+    {
+      "name": "Modification (Infos & Contenu)",
+      "questions": [
+        {
+          "question": "Je souhaite modifier mes horaires ou mon adresse",
+          "answer": "Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons à jour votre fiche Google et votre site sous 24h ouvrées. Pensez à nous prévenir aussi pour les horaires exceptionnels (jours fériés, congés annuels, travaux)."
+        },
+        {
+          "question": "Puis-je ajouter des photos à ma fiche Google ?",
+          "answer": "Oui, et c'est même fortement recommandé ! Envoyez-nous vos photos en haute qualité (minimum 720px de large, format JPG ou PNG) et nous les ajouterons à votre fiche. Les fiches avec des photos récentes reçoivent en moyenne 42% de demandes d'itinéraire en plus."
+        },
+        {
+          "question": "Je veux modifier le contenu de mon site web",
+          "answer": ""
+        },
+        {
+          "question": "Comment ajouter ou modifier mes services sur ma fiche Google ?",
+          "answer": "Envoyez-nous la liste complète de vos services (nom + description courte) par email ou via le formulaire. Nous mettrons à jour la section \"Services\" de votre fiche Google sous 24h. Une fiche bien détaillée avec tous vos services améliore votre visibilité sur les recherches spécifiques."
+        },
+        {
+          "question": "Je change de numéro de téléphone, comment mettre à jour ?",
+          "answer": "Communiquez-nous votre nouveau numéro dès que possible. Nous le mettrons à jour sur votre fiche Google, votre site web et tous les annuaires où vous êtes référencé. La cohérence de vos informations (NAP : Nom, Adresse, Téléphone) sur tous les supports est essentielle pour votre référencement local. ### Q31: Comment configurer mon calendrier de prise de rendez-vous ? Rendez-vous dans la section Calendrier de votre plateforme. Vous pouvez y définir vos disponibilités, la durée de vos rendez-vous, et les créneaux horaires proposés à vos clients. Une fois configuré, vous recevrez un lien de réservation que vous pouvez partager par email, sur votre site ou via vos réseaux sociaux. Vos clients pourront alors réserver directement en ligne et vous recevrez une notification automatique. ### Q32: Comment voir et gérer mes contacts dans le CRM ? Dans le menu principal, accédez à Contacts pour voir l'ensemble de vos prospects et clients. Vous pouvez filtrer, rechercher, ajouter des notes, des tags ou créer des tâches de suivi. Chaque contact dispose d'une fiche détaillée où vous retrouvez l'historique des échanges, les rendez-vous passés et à venir, et toutes les interactions. ### Q33: Comment planifier mes publications sur les réseaux sociaux ? La section Calendrier de contenu vous permet de créer et programmer vos publications Facebook, Instagram et Google. Rédigez votre texte, ajoutez vos images ou vidéos, puis choisissez la date et l'heure de publication. Vous pouvez préparer plusieurs semaines de contenu à l'avance. Vos publications seront diffusées automatiquement aux dates programmées. ### Q34: Comment modifier mon site web moi-même ? ### Q35: Comment gérer et répondre aux avis clients ? Dans la section Réputation, vous retrouvez tous les avis laissés sur Google, Facebook et autres plateformes. Vous pouvez répondre directement depuis votre espace client sans avoir à vous connecter sur chaque plateforme. Répondre aux avis (positifs comme négatifs) montre votre professionnalisme et améliore votre visibilité en ligne. Le Tableau de bord (disponible dès la page d'accueil) affiche vos indicateurs clés : nombre de nouveaux contacts, rendez-vous pris, taux d'ouverture des emails, performances des campagnes. Consultez-le régulièrement pour suivre vos progrès et identifier ce qui fonctionne le mieux pour votre entreprise. ### Q37: Comment voir et répondre aux messages de mes clients ? La section Conversations centralise tous les échanges : SMS, emails, messages Facebook/Instagram, webchat. Vous n'avez plus besoin de jongler entre plusieurs applications. Cliquez sur une conversation pour voir l'historique complet et répondre directement. Vos clients reçoivent votre réponse sur le canal qu'ils ont utilisé. ### Q39: Comment se passe le suivi de mon dossier ? ### Q40: À quelle fréquence ai-je un rendez-vous avec un expert ? Deux moyens complémentaires : 1) Votre rapport mensuel vous est envoyé automatiquement par email le 15 de chaque mois avec un récapitulatif complet de vos performances. 2) Votre plateforme BeeVisible (app.beevisible.online) affiche vos statistiques en temps réel — vous pouvez la consulter à tout moment pour voir vos positions, vos avis, et vos indicateurs clés."
+        }
+      ]
+    }
+  ]
+}
