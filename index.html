@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centre d'aide - BeeVisible</title>
+    <meta name="description" content="Centre d'aide BeeVisible — Trouvez des réponses à vos questions sur nos services de référencement local.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           DESIGN SYSTEM - BeeVisible Support
+           ============================================ */
+
+        /* FIX GHL */
+        .c-editor, .c-editor > div, .hl_page-creator--content,
+        .hl_page-creator--content > div, [data-page-element="Container"],
+        .container-width-full {
+            max-width: 100% !important; width: 100% !important;
+            padding-left: 0 !important; padding-right: 0 !important;
+            margin-left: 0 !important; margin-right: 0 !important;
+        }
+
+        :root {
+            --primary: #014d80;
+            --primary-light: #e0f2fe;
+            --primary-dark: #0f172a;
+            --accent: #FFD700;
+            --green: #10B981;
+            --red: #EF4444;
+            --purple: #8B5CF6;
+            --orange: #F59E0B;
+            --text: #1E293B;
+            --muted: #64748B;
+            --bg: #F8FAFC;
+            --white: #ffffff;
+            --border: #E2E8F0;
+            --shadow: 0 10px 30px -10px rgba(1, 77, 128, 0.1);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -10px rgba(1, 77, 128, 0.15);
+            --radius: 16px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body, html { overflow-x: hidden; width: 100%; }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700 !important;
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo img {
+            height: 40px;
+        }
+
+        .header-logo span {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .header-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           HERO / SEARCH
+           ============================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+            padding: 60px 0 70px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px 18px 54px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: var(--shadow-lg);
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+
+        .search-box input:focus {
+            box-shadow: 0 0 0 3px var(--accent), var(--shadow-lg);
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--muted);
+        }
+
+        /* ============================================
+           CATEGORIES GRID
+           ============================================ */
+        .categories {
+            padding: 40px 0 60px;
+        }
+
+        .categories h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-dark);
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        .cat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .cat-card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .cat-card .label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            padding: 0 0 60px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .faq-section > .container > p {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .faq-category {
+            margin-bottom: 30px;
+        }
+
+        .faq-category-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .accordion-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .accordion-item:hover { box-shadow: var(--shadow-sm); }
+
+        .accordion-header {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover { background: var(--bg); }
+
+        .accordion-header .chevron {
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .accordion-item.open .accordion-header .chevron {
+            transform: rotate(180deg);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .accordion-body-inner {
+            padding: 0 20px 16px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+            display: none;
+        }
+
+        .no-results.visible { display: block; }
+
+        /* ============================================
+           CONTACT FORM
+           ============================================ */
+        .contact-section {
+            padding: 60px 0;
+            background: var(--white);
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+
+        .contact-section > .container > p {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-group .error-msg {
+            color: var(--red);
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .form-group.has-error input,
+        .form-group.has-error select,
+        .form-group.has-error textarea {
+            border-color: var(--red);
+        }
+
+        .form-group.has-error .error-msg { display: block; }
+
+        .btn-submit {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            background: #016bad;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .form-success {
+            background: #ecfdf5;
+            border: 1px solid var(--green);
+            color: #065f46;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-success.visible { display: block; }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 40px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 8px; font-size: 0.9rem; }
+        .footer ul li a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 640px) {
+            .hero { padding: 40px 0 50px; }
+            .cat-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-row { flex-direction: column; }
+            .header-badge { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+        <div class="container">
+            <div class="header-logo">
+                <img src="https://storage.googleapis.com/msgsndr/FpKQJAgesKJXHiZAk2Cl/media/67c78e9c7c94cd55d58b5ed0.png" alt="BeeVisible">
+                <span>Centre d'aide</span>
+            </div>
+            <div class="header-badge">Support Client</div>
+        </div>
+    </header>
+
+    <!-- ============ HERO + SEARCH ============ -->
+    <section class="hero">
+        <div class="container">
+            <h1>Comment pouvons-nous vous aider ?</h1>
+            <p>Recherchez dans notre base de connaissances ou parcourez les catégories</p>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Tapez votre question ici..." autocomplete="off">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section class="categories">
+        <div class="container">
+            <h2>Parcourir par catégorie</h2>
+            <div class="cat-grid">
+                <div class="cat-card" data-category="technique">
+                    <span class="icon">🔧</span>
+                    <span class="label">Problème technique</span>
+                </div>
+                <div class="cat-card" data-category="resultats">
+                    <span class="icon">📊</span>
+                    <span class="label">Résultats & performances</span>
+                </div>
+                <div class="cat-card" data-category="facturation">
+                    <span class="icon">💳</span>
+                    <span class="label">Facturation & contrat</span>
+                </div>
+                <div class="cat-card" data-category="onboarding">
+                    <span class="icon">🚀</span>
+                    <span class="label">Onboarding</span>
+                </div>
+                <div class="cat-card" data-category="modification">
+                    <span class="icon">✏️</span>
+                    <span class="label">Modification</span>
+                </div>
+                <div class="cat-card" data-category="resiliation">
+                    <span class="icon">❌</span>
+                    <span class="label">Résiliation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2>Questions fréquentes</h2>
+            <p>Cliquez sur une question pour voir la réponse</p>
+
+            <!-- Technique -->
+            <div class="faq-category" data-cat="technique">
+                <h3 class="faq-category-title">🔧 Problème technique</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Mon site ne s'affiche plus, que faire ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Vérifiez d'abord que le problème n'est pas lié à votre connexion internet. Si le site est bien inaccessible, contactez-nous immédiatement via le formulaire ci-dessous ou par téléphone. Nous intervenons généralement sous 2h ouvrées.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Ma fiche Google affiche des informations incorrectes</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Les modifications sur Google Business Profile peuvent être suggérées par des tiers. Signalez-nous les informations incorrectes et nous effectuerons la correction sous 24h. En attendant, ne validez aucune suggestion de modification provenant de Google.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Je n'arrive pas à accéder à mon tableau de bord</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Essayez de réinitialiser votre mot de passe via le lien "Mot de passe oublié" sur la page de connexion. Si le problème persiste, contactez notre support avec l'email associé à votre compte et nous vous renverrons vos accès.
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Résultats -->
+            <div class="faq-category" data-cat="resultats">
+                <h3 class="faq-category-title">📊 Résultats & performances</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Au bout de combien de temps vais-je voir des résultats ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Les premiers résultats apparaissent généralement entre 4 et 8 semaines après le lancement. Le référencement local est un travail progressif : les positions s'améliorent de mois en mois. Nous vous envoyons un rapport mensuel pour suivre votre progression.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Comment lire mon rapport de performance mensuel ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Votre rapport contient : vos positions sur les mots-clés ciblés, le nombre de vues de votre fiche Google, les appels et demandes d'itinéraire reçus, et les actions réalisées par notre équipe. Un code couleur vert/orange/rouge vous indique la tendance.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Mes positions ont baissé, est-ce normal ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Des fluctuations ponctuelles sont normales, notamment lors des mises à jour de l'algorithme Google. Si la baisse persiste plus de 2 semaines, contactez-nous : nous analyserons la situation et ajusterons la stratégie si nécessaire.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Qu'est-ce que le "Pack Local" Google ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Le Pack Local (ou "Local Pack") est l'encadré avec la carte Google Maps qui apparaît en haut des résultats de recherche pour les requêtes locales. Y apparaître est l'objectif principal de notre travail : c'est là que 42% des clics se concentrent.
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Facturation -->
+            <div class="faq-category" data-cat="facturation">
+                <h3 class="faq-category-title">💳 Facturation & contrat</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Où puis-je retrouver mes factures ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Vos factures vous sont envoyées par email chaque mois. Vous pouvez également les retrouver dans votre espace client. Si vous avez besoin d'un duplicata, contactez-nous avec votre numéro client.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Quels sont les moyens de paiement acceptés ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Nous acceptons le prélèvement SEPA (recommandé), la carte bancaire et le virement. Le prélèvement SEPA est mis en place lors de votre inscription et garantit la continuité de service sans interruption.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Mon prélèvement a été rejeté, que se passe-t-il ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        En cas de rejet, nous vous contactons sous 48h pour régulariser la situation. Vérifiez que votre compte est suffisamment approvisionné. Après 2 rejets consécutifs, le service peut être suspendu. Contactez-nous rapidement pour éviter toute interruption.
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Onboarding -->
+            <div class="faq-category" data-cat="onboarding">
+                <h3 class="faq-category-title">🚀 Onboarding (nouveau client)</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Quelles sont les étapes après ma souscription ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        1) Vous recevez un email de bienvenue avec un questionnaire à remplir. 2) Un appel de lancement est planifié avec votre consultant dédié. 3) Nous configurons votre fiche Google et votre site. 4) Le travail de référencement démarre sous 5 jours ouvrés.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Quels accès devez-vous me fournir ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Nous avons besoin de l'accès administrateur à votre fiche Google Business Profile et, si applicable, les accès à votre site web (hébergement ou CMS). Toutes les instructions sont détaillées dans le questionnaire d'onboarding que vous recevrez par email.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Je n'ai pas encore de fiche Google, est-ce un problème ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Pas du tout ! Nous créons et optimisons votre fiche Google Business Profile dans le cadre de notre prestation. C'est même l'un des premiers points que nous traitons lors de l'onboarding.
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Modification -->
+            <div class="faq-category" data-cat="modification">
+                <h3 class="faq-category-title">✏️ Modification (site, fiche, infos)</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Je souhaite modifier mes horaires ou mon adresse</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Envoyez-nous les nouvelles informations via le formulaire ci-dessous ou par email. Nous mettons à jour votre fiche Google et votre site sous 24h ouvrées. Pensez à nous prévenir aussi pour les horaires exceptionnels (jours fériés, vacances).
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Puis-je ajouter des photos à ma fiche Google ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Oui, et c'est même recommandé ! Envoyez-nous vos photos en haute qualité (min. 720px de large) et nous les ajouterons à votre fiche. Les fiches avec photos reçoivent 42% de demandes d'itinéraire en plus.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Je veux modifier le contenu de mon site web</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Les modifications mineures (texte, photos) sont incluses dans votre abonnement. Pour des modifications structurelles (nouvelles pages, refonte), un devis complémentaire pourra être proposé. Décrivez vos besoins via le formulaire de contact.
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- Résiliation -->
+            <div class="faq-category" data-cat="resiliation">
+                <h3 class="faq-category-title">❌ Résiliation</h3>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Comment résilier mon abonnement ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        La résiliation se fait par email ou courrier recommandé avec un préavis de 30 jours. Envoyez votre demande à support@beevisible.fr en indiquant votre numéro client. Un conseiller vous contactera pour confirmer la procédure.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Que se passe-t-il après la résiliation ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Après résiliation, nous cessons le travail de référencement. Vous conservez votre fiche Google et votre site. Attention : sans maintenance, vos positions risquent de baisser progressivement. Nous vous remettrons un document récapitulatif de tout le travail effectué.
+                    </div></div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Y a-t-il des frais de résiliation ?</span>
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="accordion-body"><div class="accordion-body-inner">
+                        Si vous êtes en engagement (12 ou 24 mois), des frais correspondant aux mois restants peuvent s'appliquer selon les conditions de votre contrat. Sans engagement, aucun frais de résiliation ne s'applique au-delà du préavis de 30 jours.
+                    </div></div>
+                </div>
+            </div>
+
+            <div class="no-results" id="noResults">
+                😕 Aucun résultat trouvé. Essayez d'autres mots-clés ou contactez-nous directement.
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT FORM ============ -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Vous n'avez pas trouvé votre réponse ?</h2>
+            <p>Envoyez-nous un message, nous vous répondons sous 24h ouvrées</p>
+
+            <form class="contact-form" id="contactForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nom complet *</label>
+                        <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                        <span class="error-msg">Veuillez entrer votre nom</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="jean@exemple.fr">
+                        <span class="error-msg">Veuillez entrer un email valide</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Catégorie *</label>
+                    <select id="category" name="category" required>
+                        <option value="">— Sélectionnez —</option>
+                        <option value="technique">🔧 Problème technique</option>
+                        <option value="resultats">📊 Résultats & performances</option>
+                        <option value="facturation">💳 Facturation & contrat</option>
+                        <option value="onboarding">🚀 Onboarding</option>
+                        <option value="modification">✏️ Modification</option>
+                        <option value="resiliation">❌ Résiliation</option>
+                    </select>
+                    <span class="error-msg">Veuillez choisir une catégorie</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Décrivez votre problème ou votre question..."></textarea>
+                    <span class="error-msg">Veuillez entrer votre message</span>
+                </div>
+
+                <button type="submit" class="btn-submit">Envoyer ma demande</button>
+
+                <div class="form-success" id="formSuccess">
+                    ✅ Votre message a bien été envoyé ! Nous vous répondrons sous 24h ouvrées.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>BeeVisible</h4>
+                    <ul>
+                        <li><a href="https://beevisible.online">Site principal</a></li>
+                        <li><a href="https://beevisible.online/blog">Blog</a></li>
+                        <li><a href="https://beevisible.online/temoignages">Témoignages</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Nous contacter</a></li>
+                        <li>📞 01 23 45 67 89</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Horaires du support</h4>
+                    <ul>
+                        <li>Lundi – Vendredi</li>
+                        <li>9h00 – 18h00</li>
+                        <li>📧 support@beevisible.fr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2025 BeeVisible — Tous droits réservés
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ ZENDESK CHAT PLACEHOLDER ============ -->
+    <!-- Injecter le snippet Zendesk ici -->
+    <!-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=VOTRE_CLE"> </script> -->
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+    (function() {
+        // --- Accordions ---
+        document.querySelectorAll('.accordion-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                var item = this.parentElement;
+                var body = item.querySelector('.accordion-body');
+                var isOpen = item.classList.contains('open');
+
+                // Close all in same category
+                item.closest('.faq-category').querySelectorAll('.accordion-item.open').forEach(function(openItem) {
+                    openItem.classList.remove('open');
+                    openItem.querySelector('.accordion-body').style.maxHeight = null;
+                });
+
+                if (!isOpen) {
+                    item.classList.add('open');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // --- Category cards → scroll to FAQ ---
+        document.querySelectorAll('.cat-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var cat = this.dataset.category;
+                var target = document.querySelector('.faq-category[data-cat="' + cat + '"]');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Open first accordion
+                    var first = target.querySelector('.accordion-item');
+                    if (first && !first.classList.contains('open')) {
+                        first.querySelector('.accordion-header').click();
+                    }
+                }
+            });
+        });
+
+        // --- Search ---
+        var searchInput = document.getElementById('searchInput');
+        var noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            var query = this.value.toLowerCase().trim();
+            var anyVisible = false;
+
+            document.querySelectorAll('.faq-category').forEach(function(cat) {
+                var catVisible = false;
+                cat.querySelectorAll('.accordion-item').forEach(function(item) {
+                    var text = item.textContent.toLowerCase();
+                    var match = !query || text.indexOf(query) !== -1;
+                    item.style.display = match ? '' : 'none';
+                    if (match) catVisible = true;
+                });
+                cat.style.display = catVisible ? '' : 'none';
+                if (catVisible) anyVisible = true;
+            });
+
+            if (query) {
+                noResults.classList.toggle('visible', !anyVisible);
+            } else {
+                noResults.classList.remove('visible');
+            }
+        });
+
+        // --- Form Validation ---
+        var form = document.getElementById('contactForm');
+        var success = document.getElementById('formSuccess');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var valid = true;
+
+            // Name
+            var nameGroup = document.getElementById('name').closest('.form-group');
+            if (!document.getElementById('name').value.trim()) {
+                nameGroup.classList.add('has-error'); valid = false;
+            } else { nameGroup.classList.remove('has-error'); }
+
+            // Email
+            var emailGroup = document.getElementById('email').closest('.form-group');
+            var emailVal = document.getElementById('email').value.trim();
+            if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                emailGroup.classList.add('has-error'); valid = false;
+            } else { emailGroup.classList.remove('has-error'); }
+
+            // Category
+            var catGroup = document.getElementById('category').closest('.form-group');
+            if (!document.getElementById('category').value) {
+                catGroup.classList.add('has-error'); valid = false;
+            } else { catGroup.classList.remove('has-error'); }
+
+            // Message
+            var msgGroup = document.getElementById('message').closest('.form-group');
+            if (!document.getElementById('message').value.trim()) {
+                msgGroup.classList.add('has-error'); valid = false;
+            } else { msgGroup.classList.remove('has-error'); }
+
+            if (valid) {
+                // TODO: Connect to Zendesk / backend
+                form.reset();
+                success.classList.add('visible');
+                setTimeout(function() { success.classList.remove('visible'); }, 5000);
+            }
+        });
+
+        // Remove error on input
+        form.querySelectorAll('input, select, textarea').forEach(function(el) {
+            el.addEventListener('input', function() {
+                this.closest('.form-group').classList.remove('has-error');
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>
